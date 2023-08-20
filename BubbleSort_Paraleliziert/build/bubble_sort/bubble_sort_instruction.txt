@@ -1,0 +1,505 @@
+
+build/bubble_sort/bubble_sort.o:     Dateiformat elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000000000 <bubbleSortEven>:
+#include <omp.h>
+
+
+
+// Funktion für Bubble Sort (gerade Phasen)
+void bubbleSortEven(int array[], int length) {
+   0:	f3 0f 1e fa          	endbr64 
+   4:	55                   	push   %rbp
+   5:	48 89 e5             	mov    %rsp,%rbp
+   8:	48 83 ec 30          	sub    $0x30,%rsp
+   c:	48 89 7d d8          	mov    %rdi,-0x28(%rbp)
+  10:	89 75 d4             	mov    %esi,-0x2c(%rbp)
+  13:	64 48 8b 04 25 28 00 	mov    %fs:0x28,%rax
+  1a:	00 00 
+  1c:	48 89 45 f8          	mov    %rax,-0x8(%rbp)
+  20:	31 c0                	xor    %eax,%eax
+   int i, tmp;
+   #pragma omp parallel for default(none), shared(array, length) private(i, tmp)
+  22:	48 8b 45 d8          	mov    -0x28(%rbp),%rax
+  26:	48 89 45 e0          	mov    %rax,-0x20(%rbp)
+  2a:	8b 45 d4             	mov    -0x2c(%rbp),%eax
+  2d:	89 45 e8             	mov    %eax,-0x18(%rbp)
+  30:	48 8d 45 e0          	lea    -0x20(%rbp),%rax
+  34:	b9 00 00 00 00       	mov    $0x0,%ecx
+  39:	ba 00 00 00 00       	mov    $0x0,%edx
+  3e:	48 89 c6             	mov    %rax,%rsi
+  41:	48 8d 05 1d 02 00 00 	lea    0x21d(%rip),%rax        # 265 <bubbleSortEven._omp_fn.0>
+  48:	48 89 c7             	mov    %rax,%rdi
+  4b:	e8 00 00 00 00       	call   50 <bubbleSortEven+0x50>
+          tmp = array[i];
+          array[i] = array[i + 1];
+          array[i + 1] = tmp;
+      }
+   }
+}
+  50:	90                   	nop
+  51:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+  55:	64 48 2b 04 25 28 00 	sub    %fs:0x28,%rax
+  5c:	00 00 
+  5e:	74 05                	je     65 <bubbleSortEven+0x65>
+  60:	e8 00 00 00 00       	call   65 <bubbleSortEven+0x65>
+  65:	c9                   	leave  
+  66:	c3                   	ret    
+
+0000000000000067 <bubbleSortOdd>:
+
+// Funktion für Bubble Sort (ungerade Phasen)
+void bubbleSortOdd(int array[], int length) {
+  67:	f3 0f 1e fa          	endbr64 
+  6b:	55                   	push   %rbp
+  6c:	48 89 e5             	mov    %rsp,%rbp
+  6f:	48 83 ec 30          	sub    $0x30,%rsp
+  73:	48 89 7d d8          	mov    %rdi,-0x28(%rbp)
+  77:	89 75 d4             	mov    %esi,-0x2c(%rbp)
+  7a:	64 48 8b 04 25 28 00 	mov    %fs:0x28,%rax
+  81:	00 00 
+  83:	48 89 45 f8          	mov    %rax,-0x8(%rbp)
+  87:	31 c0                	xor    %eax,%eax
+   int i, tmp;
+   #pragma omp parallel for default(none), shared(array, length) private(i, tmp)
+  89:	48 8b 45 d8          	mov    -0x28(%rbp),%rax
+  8d:	48 89 45 e0          	mov    %rax,-0x20(%rbp)
+  91:	8b 45 d4             	mov    -0x2c(%rbp),%eax
+  94:	89 45 e8             	mov    %eax,-0x18(%rbp)
+  97:	48 8d 45 e0          	lea    -0x20(%rbp),%rax
+  9b:	b9 00 00 00 00       	mov    $0x0,%ecx
+  a0:	ba 00 00 00 00       	mov    $0x0,%edx
+  a5:	48 89 c6             	mov    %rax,%rsi
+  a8:	48 8d 05 f2 02 00 00 	lea    0x2f2(%rip),%rax        # 3a1 <bubbleSortOdd._omp_fn.0>
+  af:	48 89 c7             	mov    %rax,%rdi
+  b2:	e8 00 00 00 00       	call   b7 <bubbleSortOdd+0x50>
+          tmp = array[i];
+          array[i] = array[i + 1];
+          array[i + 1] = tmp;
+      }
+   }
+}
+  b7:	90                   	nop
+  b8:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+  bc:	64 48 2b 04 25 28 00 	sub    %fs:0x28,%rax
+  c3:	00 00 
+  c5:	74 05                	je     cc <bubbleSortOdd+0x65>
+  c7:	e8 00 00 00 00       	call   cc <bubbleSortOdd+0x65>
+  cc:	c9                   	leave  
+  cd:	c3                   	ret    
+
+00000000000000ce <printArray>:
+
+// Hilfsfunktion zum Drucken eines Arrays
+void printArray(int array[], int size) {
+  ce:	f3 0f 1e fa          	endbr64 
+  d2:	55                   	push   %rbp
+  d3:	48 89 e5             	mov    %rsp,%rbp
+  d6:	48 83 ec 20          	sub    $0x20,%rsp
+  da:	48 89 7d e8          	mov    %rdi,-0x18(%rbp)
+  de:	89 75 e4             	mov    %esi,-0x1c(%rbp)
+  for (int i = 0; i < size; i++) {
+  e1:	c7 45 fc 00 00 00 00 	movl   $0x0,-0x4(%rbp)
+  e8:	eb 30                	jmp    11a <printArray+0x4c>
+    printf("%d ", array[i]);
+  ea:	8b 45 fc             	mov    -0x4(%rbp),%eax
+  ed:	48 98                	cltq   
+  ef:	48 8d 14 85 00 00 00 	lea    0x0(,%rax,4),%rdx
+  f6:	00 
+  f7:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+  fb:	48 01 d0             	add    %rdx,%rax
+  fe:	8b 00                	mov    (%rax),%eax
+ 100:	89 c6                	mov    %eax,%esi
+ 102:	48 8d 05 00 00 00 00 	lea    0x0(%rip),%rax        # 109 <printArray+0x3b>
+ 109:	48 89 c7             	mov    %rax,%rdi
+ 10c:	b8 00 00 00 00       	mov    $0x0,%eax
+ 111:	e8 00 00 00 00       	call   116 <printArray+0x48>
+  for (int i = 0; i < size; i++) {
+ 116:	83 45 fc 01          	addl   $0x1,-0x4(%rbp)
+ 11a:	8b 45 fc             	mov    -0x4(%rbp),%eax
+ 11d:	3b 45 e4             	cmp    -0x1c(%rbp),%eax
+ 120:	7c c8                	jl     ea <printArray+0x1c>
+  }
+  printf("\n");
+ 122:	bf 0a 00 00 00       	mov    $0xa,%edi
+ 127:	e8 00 00 00 00       	call   12c <printArray+0x5e>
+}
+ 12c:	90                   	nop
+ 12d:	c9                   	leave  
+ 12e:	c3                   	ret    
+
+000000000000012f <main>:
+
+// Hauptfunktion
+int main() {
+ 12f:	f3 0f 1e fa          	endbr64 
+ 133:	55                   	push   %rbp
+ 134:	48 89 e5             	mov    %rsp,%rbp
+ 137:	48 81 ec c0 0b 00 00 	sub    $0xbc0,%rsp
+ 13e:	64 48 8b 04 25 28 00 	mov    %fs:0x28,%rax
+ 145:	00 00 
+ 147:	48 89 45 f8          	mov    %rax,-0x8(%rbp)
+ 14b:	31 c0                	xor    %eax,%eax
+  
+  int array[] = {673, 204, 912, 621, 430, 192, 899, 587, 76, 928, 387, 541, 314, 843, 657, 38, 501, 712, 199, 857, 724, 146, 383, 661, 299, 553, 908, 45, 528, 786, 963, 108, 321, 792, 562, 868, 180, 453, 645, 7, 678, 115, 855, 245, 962, 594, 380, 728, 813, 288, 491, 40, 206, 917, 647, 734, 176, 321, 945, 567, 84, 341, 576, 229, 937, 513, 648, 875, 19, 452, 732, 297, 85, 779, 603, 853, 365, 749, 106, 322, 890, 665, 206, 985, 462, 738, 859, 640, 286, 118, 552, 787, 392, 637, 137, 471, 776, 32, 190, 609, 468, 889, 397, 222, 515, 954, 102, 488, 758, 499, 841, 709, 941, 212, 714, 568, 892, 100, 503, 782, 991, 707, 127, 297, 967, 250, 529, 874, 722, 432, 296, 646, 433, 70, 726, 409, 884, 267, 644, 897, 230, 602, 92, 566, 915, 10, 537, 835, 253, 479, 320, 61, 970, 614, 123, 921, 228, 484, 787, 128, 778, 565, 151, 372, 20, 747, 204, 862, 725, 901, 508, 363, 30, 936, 320, 622, 147, 586, 856, 278, 913, 506, 214, 926, 467, 162, 808, 343, 95, 276, 554, 271, 768, 383, 825, 570, 898, 37, 604, 879, 139, 464, 321, 984, 732, 55, 853, 197, 676, 281, 596, 35, 421, 963, 799, 505, 178, 570, 349, 661, 206, 980, 735, 189, 660, 999, 793, 422, 286, 605, 482, 815, 671, 270, 622, 936, 101, 470, 702, 82, 433, 122, 586, 269, 57, 895, 644, 11, 757, 256, 572, 748, 518, 320, 968, 705, 459, 829, 300, 551, 47, 962, 751, 5, 514, 280, 647, 423, 60, 806, 515, 190, 705, 824, 74, 307, 82, 418, 883, 143, 562, 386, 701, 965, 684, 396, 142, 597, 864, 219, 839, 160, 14, 685, 321, 20, 647, 528, 942, 332, 578, 868, 269, 759, 155, 333, 267, 718, 491, 54, 804, 648, 462, 710, 963, 724, 45, 529, 431, 107, 657, 198, 849, 525, 296, 820, 654, 48, 419, 959, 146, 642, 218, 793, 51, 844, 610, 51, 37, 942, 154, 731, 579, 484, 61, 648, 721, 235, 924, 694, 20, 305, 864, 263, 521, 784, 375, 860, 179, 586, 270, 526, 976, 410, 658, 228, 725, 351, 990, 447, 761, 225, 814, 573, 63, 47, 856, 974, 233, 512, 85, 43, 782, 136, 958, 646, 284, 421, 868, 699, 288, 219, 431, 846, 724, 157, 752, 937, 103, 856, 41, 725, 10, 822, 644, 113, 534, 266, 769, 368, 161, 532, 94, 9, 672, 364, 708, 951, 319, 246, 601, 395, 122, 912, 283, 567, 795, 682, 456, 219, 781, 605, 28, 797, 155, 563, 623, 176, 654, 972, 47, 707, 894, 40, 867, 58, 203, 528, 997, 803, 301, 768, 519, 345, 660, 342, 699, 854, 551, 301, 774, 896, 62, 310, 649, 317, 944, 240, 469, 764, 680, 74, 82, 910, 251, 357, 771, 273, 187, 792, 576, 971, 801, 349, 315, 471, 657, 336, 112, 414, 383, 620, 243, 396, 963, 4, 295, 791, 930, 428, 383, 689, 68, 734, 357, 47, 583, 846, 910, 504, 295, 603, 239, 764, 31, 535, 847, 186, 720, 173, 951, 482, 268, 124, 830, 679, 289, 645, 488, 77, 768, 408, 34, 843, 520, 9, 274, 609, 647, 197, 49, 911, 128, 768, 168, 507, 441, 791, 648, 270, 530, 52, 227, 756, 409, 975, 78, 670, 542, 67, 793, 17, 285, 569, 409, 726, 950, 25, 520, 298, 858, 619, 199, 903, 664, 46, 195, 897, 736, 396, 26, 394, 481, 785, 51, 974, 42, 797, 763, 518, 386, 934, 272, 982, 748, 403, 758, 539, 237, 968, 99, 503, 751, 245, 218, 493, 821, 431, 693, 148, 295, 809, 150, 282, 452, 71, 598, 587, 459, 682, 753, 46, 670, 936, 641, 177, 589, 835, 348, 481, 207, 989, 438, 125, 479, 760, 805, 333, 920, 672, 38, 723, 973, 586, 257, 455, 57, 243, 755, 37, 780, 670, 830, 255, 79, 121, 547, 325, 800, 578, 512, 410, 794, 632, 912, 324, 247, 67, 425, 688, 367, 122, 10, 264, 607, 169, 685, 119, 801, 872, 694, 513, 284, 703, 48, 784, 366, 856, 654, 836, 224, 792, 84, 244, 493, 908, 666, 857, 477, 312, 650, 890, 876, 361, 21, 393, 981, 158, 557, 749, 46, 328, 913, 567, 692, 38, 605, 476, 163, 746, 377, 622, 848, 578, 982, 683, 316, 396, 747, 906, 493, 341, 688, 59, 764, 957, 282, 769, 825};
+ 14d:	48 8d 85 60 f4 ff ff 	lea    -0xba0(%rbp),%rax
+ 154:	48 8d 15 00 00 00 00 	lea    0x0(%rip),%rdx        # 15b <main+0x2c>
+ 15b:	b9 71 01 00 00       	mov    $0x171,%ecx
+ 160:	48 89 c7             	mov    %rax,%rdi
+ 163:	48 89 d6             	mov    %rdx,%rsi
+ 166:	f3 48 a5             	rep movsq %ds:(%rsi),%es:(%rdi)
+ 169:	48 89 f2             	mov    %rsi,%rdx
+ 16c:	48 89 f8             	mov    %rdi,%rax
+ 16f:	8b 0a                	mov    (%rdx),%ecx
+ 171:	89 08                	mov    %ecx,(%rax)
+  int size = sizeof(array) / sizeof(array[0]);
+ 173:	c7 85 4c f4 ff ff e3 	movl   $0x2e3,-0xbb4(%rbp)
+ 17a:	02 00 00 
+  printf("Unsortiertes Array: ");
+ 17d:	48 8d 05 00 00 00 00 	lea    0x0(%rip),%rax        # 184 <main+0x55>
+ 184:	48 89 c7             	mov    %rax,%rdi
+ 187:	b8 00 00 00 00       	mov    $0x0,%eax
+ 18c:	e8 00 00 00 00       	call   191 <main+0x62>
+  printArray(array, size);
+ 191:	8b 95 4c f4 ff ff    	mov    -0xbb4(%rbp),%edx
+ 197:	48 8d 85 60 f4 ff ff 	lea    -0xba0(%rbp),%rax
+ 19e:	89 d6                	mov    %edx,%esi
+ 1a0:	48 89 c7             	mov    %rax,%rdi
+ 1a3:	e8 00 00 00 00       	call   1a8 <main+0x79>
+
+  for (int i = 0; i < size / 2; i++) {
+ 1a8:	c7 85 48 f4 ff ff 00 	movl   $0x0,-0xbb8(%rbp)
+ 1af:	00 00 00 
+ 1b2:	eb 54                	jmp    208 <main+0xd9>
+     omp_set_num_threads(2);
+ 1b4:	bf 02 00 00 00       	mov    $0x2,%edi
+ 1b9:	e8 00 00 00 00       	call   1be <main+0x8f>
+    #pragma omp parallel sections
+ 1be:	8b 85 4c f4 ff ff    	mov    -0xbb4(%rbp),%eax
+ 1c4:	89 85 58 f4 ff ff    	mov    %eax,-0xba8(%rbp)
+ 1ca:	48 8d 85 60 f4 ff ff 	lea    -0xba0(%rbp),%rax
+ 1d1:	48 89 85 50 f4 ff ff 	mov    %rax,-0xbb0(%rbp)
+ 1d8:	48 8d 85 50 f4 ff ff 	lea    -0xbb0(%rbp),%rax
+ 1df:	41 b8 00 00 00 00    	mov    $0x0,%r8d
+ 1e5:	b9 02 00 00 00       	mov    $0x2,%ecx
+ 1ea:	ba 00 00 00 00       	mov    $0x0,%edx
+ 1ef:	48 89 c6             	mov    %rax,%rsi
+ 1f2:	48 8d 05 e7 02 00 00 	lea    0x2e7(%rip),%rax        # 4e0 <main._omp_fn.0>
+ 1f9:	48 89 c7             	mov    %rax,%rdi
+ 1fc:	e8 00 00 00 00       	call   201 <main+0xd2>
+  for (int i = 0; i < size / 2; i++) {
+ 201:	83 85 48 f4 ff ff 01 	addl   $0x1,-0xbb8(%rbp)
+ 208:	8b 85 4c f4 ff ff    	mov    -0xbb4(%rbp),%eax
+ 20e:	89 c2                	mov    %eax,%edx
+ 210:	c1 ea 1f             	shr    $0x1f,%edx
+ 213:	01 d0                	add    %edx,%eax
+ 215:	d1 f8                	sar    %eax
+ 217:	39 85 48 f4 ff ff    	cmp    %eax,-0xbb8(%rbp)
+ 21d:	7c 95                	jl     1b4 <main+0x85>
+      #pragma omp section
+      bubbleSortOdd(array, size);
+    }
+  }
+
+  printf("Sortiertes Array: ");
+ 21f:	48 8d 05 00 00 00 00 	lea    0x0(%rip),%rax        # 226 <main+0xf7>
+ 226:	48 89 c7             	mov    %rax,%rdi
+ 229:	b8 00 00 00 00       	mov    $0x0,%eax
+ 22e:	e8 00 00 00 00       	call   233 <main+0x104>
+  printArray(array, size);
+ 233:	8b 95 4c f4 ff ff    	mov    -0xbb4(%rbp),%edx
+ 239:	48 8d 85 60 f4 ff ff 	lea    -0xba0(%rbp),%rax
+ 240:	89 d6                	mov    %edx,%esi
+ 242:	48 89 c7             	mov    %rax,%rdi
+ 245:	e8 00 00 00 00       	call   24a <main+0x11b>
+ 24a:	b8 00 00 00 00       	mov    $0x0,%eax
+}
+ 24f:	48 8b 55 f8          	mov    -0x8(%rbp),%rdx
+ 253:	64 48 2b 14 25 28 00 	sub    %fs:0x28,%rdx
+ 25a:	00 00 
+ 25c:	74 05                	je     263 <main+0x134>
+ 25e:	e8 00 00 00 00       	call   263 <main+0x134>
+ 263:	c9                   	leave  
+ 264:	c3                   	ret    
+
+0000000000000265 <bubbleSortEven._omp_fn.0>:
+   #pragma omp parallel for default(none), shared(array, length) private(i, tmp)
+ 265:	f3 0f 1e fa          	endbr64 
+ 269:	55                   	push   %rbp
+ 26a:	48 89 e5             	mov    %rsp,%rbp
+ 26d:	41 54                	push   %r12
+ 26f:	53                   	push   %rbx
+ 270:	48 83 ec 30          	sub    $0x30,%rsp
+ 274:	48 89 7d c8          	mov    %rdi,-0x38(%rbp)
+ 278:	48 8b 45 c8          	mov    -0x38(%rbp),%rax
+ 27c:	48 8b 00             	mov    (%rax),%rax
+ 27f:	48 89 45 e8          	mov    %rax,-0x18(%rbp)
+ 283:	48 8b 45 c8          	mov    -0x38(%rbp),%rax
+ 287:	8b 40 08             	mov    0x8(%rax),%eax
+ 28a:	89 45 e0             	mov    %eax,-0x20(%rbp)
+   for (i = 0; i < length - 1; i += 2) {
+ 28d:	8b 45 e0             	mov    -0x20(%rbp),%eax
+ 290:	44 8d 60 ff          	lea    -0x1(%rax),%r12d
+ 294:	e8 00 00 00 00       	call   299 <bubbleSortEven._omp_fn.0+0x34>
+ 299:	89 c3                	mov    %eax,%ebx
+ 29b:	e8 00 00 00 00       	call   2a0 <bubbleSortEven._omp_fn.0+0x3b>
+ 2a0:	89 c7                	mov    %eax,%edi
+ 2a2:	41 8d 44 24 01       	lea    0x1(%r12),%eax
+ 2a7:	89 c2                	mov    %eax,%edx
+ 2a9:	c1 ea 1f             	shr    $0x1f,%edx
+ 2ac:	01 d0                	add    %edx,%eax
+ 2ae:	d1 f8                	sar    %eax
+ 2b0:	89 c6                	mov    %eax,%esi
+ 2b2:	89 f0                	mov    %esi,%eax
+ 2b4:	99                   	cltd   
+ 2b5:	f7 fb                	idiv   %ebx
+ 2b7:	89 c1                	mov    %eax,%ecx
+ 2b9:	89 f0                	mov    %esi,%eax
+ 2bb:	99                   	cltd   
+ 2bc:	f7 fb                	idiv   %ebx
+ 2be:	89 d0                	mov    %edx,%eax
+ 2c0:	39 c7                	cmp    %eax,%edi
+ 2c2:	0f 8c c2 00 00 00    	jl     38a <bubbleSortEven._omp_fn.0+0x125>
+ 2c8:	0f af f9             	imul   %ecx,%edi
+ 2cb:	89 fa                	mov    %edi,%edx
+ 2cd:	01 d0                	add    %edx,%eax
+ 2cf:	8d 14 08             	lea    (%rax,%rcx,1),%edx
+ 2d2:	39 d0                	cmp    %edx,%eax
+ 2d4:	0f 8d bd 00 00 00    	jge    397 <bubbleSortEven._omp_fn.0+0x132>
+ 2da:	01 c0                	add    %eax,%eax
+ 2dc:	89 45 dc             	mov    %eax,-0x24(%rbp)
+ 2df:	8d 0c 12             	lea    (%rdx,%rdx,1),%ecx
+      if (array[i] > array[i + 1]) {
+ 2e2:	8b 45 dc             	mov    -0x24(%rbp),%eax
+ 2e5:	48 98                	cltq   
+ 2e7:	48 8d 14 85 00 00 00 	lea    0x0(,%rax,4),%rdx
+ 2ee:	00 
+ 2ef:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+ 2f3:	48 01 d0             	add    %rdx,%rax
+ 2f6:	8b 10                	mov    (%rax),%edx
+ 2f8:	8b 45 dc             	mov    -0x24(%rbp),%eax
+ 2fb:	48 98                	cltq   
+ 2fd:	48 83 c0 01          	add    $0x1,%rax
+ 301:	48 8d 34 85 00 00 00 	lea    0x0(,%rax,4),%rsi
+ 308:	00 
+ 309:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+ 30d:	48 01 f0             	add    %rsi,%rax
+ 310:	8b 00                	mov    (%rax),%eax
+ 312:	39 c2                	cmp    %eax,%edx
+ 314:	7f 0b                	jg     321 <bubbleSortEven._omp_fn.0+0xbc>
+ 316:	83 45 dc 02          	addl   $0x2,-0x24(%rbp)
+ 31a:	39 4d dc             	cmp    %ecx,-0x24(%rbp)
+ 31d:	7c c3                	jl     2e2 <bubbleSortEven._omp_fn.0+0x7d>
+   #pragma omp parallel for default(none), shared(array, length) private(i, tmp)
+ 31f:	eb 76                	jmp    397 <bubbleSortEven._omp_fn.0+0x132>
+          tmp = array[i];
+ 321:	8b 45 dc             	mov    -0x24(%rbp),%eax
+ 324:	48 98                	cltq   
+ 326:	48 8d 14 85 00 00 00 	lea    0x0(,%rax,4),%rdx
+ 32d:	00 
+ 32e:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+ 332:	48 01 d0             	add    %rdx,%rax
+ 335:	8b 00                	mov    (%rax),%eax
+ 337:	89 45 e4             	mov    %eax,-0x1c(%rbp)
+          array[i] = array[i + 1];
+ 33a:	8b 45 dc             	mov    -0x24(%rbp),%eax
+ 33d:	48 98                	cltq   
+ 33f:	48 83 c0 01          	add    $0x1,%rax
+ 343:	48 8d 14 85 00 00 00 	lea    0x0(,%rax,4),%rdx
+ 34a:	00 
+ 34b:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+ 34f:	48 01 d0             	add    %rdx,%rax
+ 352:	8b 55 dc             	mov    -0x24(%rbp),%edx
+ 355:	48 63 d2             	movslq %edx,%rdx
+ 358:	48 8d 34 95 00 00 00 	lea    0x0(,%rdx,4),%rsi
+ 35f:	00 
+ 360:	48 8b 55 e8          	mov    -0x18(%rbp),%rdx
+ 364:	48 01 f2             	add    %rsi,%rdx
+ 367:	8b 00                	mov    (%rax),%eax
+ 369:	89 02                	mov    %eax,(%rdx)
+          array[i + 1] = tmp;
+ 36b:	8b 45 dc             	mov    -0x24(%rbp),%eax
+ 36e:	48 98                	cltq   
+ 370:	48 83 c0 01          	add    $0x1,%rax
+ 374:	48 8d 14 85 00 00 00 	lea    0x0(,%rax,4),%rdx
+ 37b:	00 
+ 37c:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+ 380:	48 01 c2             	add    %rax,%rdx
+ 383:	8b 45 e4             	mov    -0x1c(%rbp),%eax
+ 386:	89 02                	mov    %eax,(%rdx)
+ 388:	eb 8c                	jmp    316 <bubbleSortEven._omp_fn.0+0xb1>
+ 38a:	b8 00 00 00 00       	mov    $0x0,%eax
+ 38f:	83 c1 01             	add    $0x1,%ecx
+ 392:	e9 31 ff ff ff       	jmp    2c8 <bubbleSortEven._omp_fn.0+0x63>
+   #pragma omp parallel for default(none), shared(array, length) private(i, tmp)
+ 397:	90                   	nop
+ 398:	48 83 c4 30          	add    $0x30,%rsp
+ 39c:	5b                   	pop    %rbx
+ 39d:	41 5c                	pop    %r12
+ 39f:	5d                   	pop    %rbp
+ 3a0:	c3                   	ret    
+
+00000000000003a1 <bubbleSortOdd._omp_fn.0>:
+   #pragma omp parallel for default(none), shared(array, length) private(i, tmp)
+ 3a1:	f3 0f 1e fa          	endbr64 
+ 3a5:	55                   	push   %rbp
+ 3a6:	48 89 e5             	mov    %rsp,%rbp
+ 3a9:	41 54                	push   %r12
+ 3ab:	53                   	push   %rbx
+ 3ac:	48 83 ec 30          	sub    $0x30,%rsp
+ 3b0:	48 89 7d c8          	mov    %rdi,-0x38(%rbp)
+ 3b4:	48 8b 45 c8          	mov    -0x38(%rbp),%rax
+ 3b8:	48 8b 00             	mov    (%rax),%rax
+ 3bb:	48 89 45 e8          	mov    %rax,-0x18(%rbp)
+ 3bf:	48 8b 45 c8          	mov    -0x38(%rbp),%rax
+ 3c3:	8b 40 08             	mov    0x8(%rax),%eax
+ 3c6:	89 45 e0             	mov    %eax,-0x20(%rbp)
+   for (i = 1; i < length - 1; i += 2) {
+ 3c9:	8b 45 e0             	mov    -0x20(%rbp),%eax
+ 3cc:	44 8d 60 ff          	lea    -0x1(%rax),%r12d
+ 3d0:	e8 00 00 00 00       	call   3d5 <bubbleSortOdd._omp_fn.0+0x34>
+ 3d5:	89 c3                	mov    %eax,%ebx
+ 3d7:	e8 00 00 00 00       	call   3dc <bubbleSortOdd._omp_fn.0+0x3b>
+ 3dc:	89 c7                	mov    %eax,%edi
+ 3de:	44 89 e0             	mov    %r12d,%eax
+ 3e1:	c1 e8 1f             	shr    $0x1f,%eax
+ 3e4:	44 01 e0             	add    %r12d,%eax
+ 3e7:	d1 f8                	sar    %eax
+ 3e9:	89 c6                	mov    %eax,%esi
+ 3eb:	89 f0                	mov    %esi,%eax
+ 3ed:	99                   	cltd   
+ 3ee:	f7 fb                	idiv   %ebx
+ 3f0:	89 c1                	mov    %eax,%ecx
+ 3f2:	89 f0                	mov    %esi,%eax
+ 3f4:	99                   	cltd   
+ 3f5:	f7 fb                	idiv   %ebx
+ 3f7:	89 d0                	mov    %edx,%eax
+ 3f9:	39 c7                	cmp    %eax,%edi
+ 3fb:	0f 8c c8 00 00 00    	jl     4c9 <bubbleSortOdd._omp_fn.0+0x128>
+ 401:	0f af f9             	imul   %ecx,%edi
+ 404:	89 fa                	mov    %edi,%edx
+ 406:	01 d0                	add    %edx,%eax
+ 408:	8d 14 08             	lea    (%rax,%rcx,1),%edx
+ 40b:	39 d0                	cmp    %edx,%eax
+ 40d:	0f 8d c3 00 00 00    	jge    4d6 <bubbleSortOdd._omp_fn.0+0x135>
+ 413:	01 c0                	add    %eax,%eax
+ 415:	83 c0 01             	add    $0x1,%eax
+ 418:	89 45 dc             	mov    %eax,-0x24(%rbp)
+ 41b:	8d 04 12             	lea    (%rdx,%rdx,1),%eax
+ 41e:	8d 48 01             	lea    0x1(%rax),%ecx
+      if (array[i] > array[i + 1]) {
+ 421:	8b 45 dc             	mov    -0x24(%rbp),%eax
+ 424:	48 98                	cltq   
+ 426:	48 8d 14 85 00 00 00 	lea    0x0(,%rax,4),%rdx
+ 42d:	00 
+ 42e:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+ 432:	48 01 d0             	add    %rdx,%rax
+ 435:	8b 10                	mov    (%rax),%edx
+ 437:	8b 45 dc             	mov    -0x24(%rbp),%eax
+ 43a:	48 98                	cltq   
+ 43c:	48 83 c0 01          	add    $0x1,%rax
+ 440:	48 8d 34 85 00 00 00 	lea    0x0(,%rax,4),%rsi
+ 447:	00 
+ 448:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+ 44c:	48 01 f0             	add    %rsi,%rax
+ 44f:	8b 00                	mov    (%rax),%eax
+ 451:	39 c2                	cmp    %eax,%edx
+ 453:	7f 0b                	jg     460 <bubbleSortOdd._omp_fn.0+0xbf>
+ 455:	83 45 dc 02          	addl   $0x2,-0x24(%rbp)
+ 459:	39 4d dc             	cmp    %ecx,-0x24(%rbp)
+ 45c:	7c c3                	jl     421 <bubbleSortOdd._omp_fn.0+0x80>
+   #pragma omp parallel for default(none), shared(array, length) private(i, tmp)
+ 45e:	eb 76                	jmp    4d6 <bubbleSortOdd._omp_fn.0+0x135>
+          tmp = array[i];
+ 460:	8b 45 dc             	mov    -0x24(%rbp),%eax
+ 463:	48 98                	cltq   
+ 465:	48 8d 14 85 00 00 00 	lea    0x0(,%rax,4),%rdx
+ 46c:	00 
+ 46d:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+ 471:	48 01 d0             	add    %rdx,%rax
+ 474:	8b 00                	mov    (%rax),%eax
+ 476:	89 45 e4             	mov    %eax,-0x1c(%rbp)
+          array[i] = array[i + 1];
+ 479:	8b 45 dc             	mov    -0x24(%rbp),%eax
+ 47c:	48 98                	cltq   
+ 47e:	48 83 c0 01          	add    $0x1,%rax
+ 482:	48 8d 14 85 00 00 00 	lea    0x0(,%rax,4),%rdx
+ 489:	00 
+ 48a:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+ 48e:	48 01 d0             	add    %rdx,%rax
+ 491:	8b 55 dc             	mov    -0x24(%rbp),%edx
+ 494:	48 63 d2             	movslq %edx,%rdx
+ 497:	48 8d 34 95 00 00 00 	lea    0x0(,%rdx,4),%rsi
+ 49e:	00 
+ 49f:	48 8b 55 e8          	mov    -0x18(%rbp),%rdx
+ 4a3:	48 01 f2             	add    %rsi,%rdx
+ 4a6:	8b 00                	mov    (%rax),%eax
+ 4a8:	89 02                	mov    %eax,(%rdx)
+          array[i + 1] = tmp;
+ 4aa:	8b 45 dc             	mov    -0x24(%rbp),%eax
+ 4ad:	48 98                	cltq   
+ 4af:	48 83 c0 01          	add    $0x1,%rax
+ 4b3:	48 8d 14 85 00 00 00 	lea    0x0(,%rax,4),%rdx
+ 4ba:	00 
+ 4bb:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+ 4bf:	48 01 c2             	add    %rax,%rdx
+ 4c2:	8b 45 e4             	mov    -0x1c(%rbp),%eax
+ 4c5:	89 02                	mov    %eax,(%rdx)
+ 4c7:	eb 8c                	jmp    455 <bubbleSortOdd._omp_fn.0+0xb4>
+ 4c9:	b8 00 00 00 00       	mov    $0x0,%eax
+ 4ce:	83 c1 01             	add    $0x1,%ecx
+ 4d1:	e9 2b ff ff ff       	jmp    401 <bubbleSortOdd._omp_fn.0+0x60>
+   #pragma omp parallel for default(none), shared(array, length) private(i, tmp)
+ 4d6:	90                   	nop
+ 4d7:	48 83 c4 30          	add    $0x30,%rsp
+ 4db:	5b                   	pop    %rbx
+ 4dc:	41 5c                	pop    %r12
+ 4de:	5d                   	pop    %rbp
+ 4df:	c3                   	ret    
+
+00000000000004e0 <main._omp_fn.0>:
+    #pragma omp parallel sections
+ 4e0:	f3 0f 1e fa          	endbr64 
+ 4e4:	55                   	push   %rbp
+ 4e5:	48 89 e5             	mov    %rsp,%rbp
+ 4e8:	48 83 ec 20          	sub    $0x20,%rsp
+ 4ec:	48 89 7d e8          	mov    %rdi,-0x18(%rbp)
+ 4f0:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+ 4f4:	8b 40 08             	mov    0x8(%rax),%eax
+ 4f7:	89 45 fc             	mov    %eax,-0x4(%rbp)
+ 4fa:	e8 00 00 00 00       	call   4ff <main._omp_fn.0+0x1f>
+ 4ff:	83 f8 02             	cmp    $0x2,%eax
+ 502:	74 1e                	je     522 <main._omp_fn.0+0x42>
+ 504:	83 f8 02             	cmp    $0x2,%eax
+ 507:	77 09                	ja     512 <main._omp_fn.0+0x32>
+ 509:	85 c0                	test   %eax,%eax
+ 50b:	74 07                	je     514 <main._omp_fn.0+0x34>
+ 50d:	83 f8 01             	cmp    $0x1,%eax
+ 510:	74 26                	je     538 <main._omp_fn.0+0x58>
+ 512:	0f 0b                	ud2    
+ 514:	e8 00 00 00 00       	call   519 <main._omp_fn.0+0x39>
+ 519:	eb 33                	jmp    54e <main._omp_fn.0+0x6e>
+ 51b:	e8 00 00 00 00       	call   520 <main._omp_fn.0+0x40>
+ 520:	eb dd                	jmp    4ff <main._omp_fn.0+0x1f>
+      bubbleSortOdd(array, size);
+ 522:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+ 526:	48 8b 00             	mov    (%rax),%rax
+ 529:	8b 55 fc             	mov    -0x4(%rbp),%edx
+ 52c:	89 d6                	mov    %edx,%esi
+ 52e:	48 89 c7             	mov    %rax,%rdi
+ 531:	e8 00 00 00 00       	call   536 <main._omp_fn.0+0x56>
+ 536:	eb e3                	jmp    51b <main._omp_fn.0+0x3b>
+      bubbleSortEven(array, size);
+ 538:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+ 53c:	48 8b 00             	mov    (%rax),%rax
+ 53f:	8b 55 fc             	mov    -0x4(%rbp),%edx
+ 542:	89 d6                	mov    %edx,%esi
+ 544:	48 89 c7             	mov    %rax,%rdi
+ 547:	e8 00 00 00 00       	call   54c <main._omp_fn.0+0x6c>
+ 54c:	eb cd                	jmp    51b <main._omp_fn.0+0x3b>
+    #pragma omp parallel sections
+ 54e:	c9                   	leave  
+ 54f:	c3                   	ret    

@@ -1,0 +1,21 @@
+./build/bubble_sort_O2/bubble_sort_O2.o: 1: ELF: not found
+./build/bubble_sort_O2/bubble_sort_O2.o: 2: ]Aé„¿: not found
+./build/bubble_sort_O2/bubble_sort_O2.o: 3: Syntax error: ")" unexpected
+
+ Performance counter stats for './build/bubble_sort_O2/bubble_sort_O2.o':
+
+              0,39 msec task-clock                #    0,241 CPUs utilized          
+                 0      context-switches          #    0,000 /sec                   
+                 0      cpu-migrations            #    0,000 /sec                   
+                66      page-faults               #  167,299 K/sec                  
+         1.449.274      cycles                    #    3,674 GHz                    
+         1.450.433      instructions              #    1,00  insn per cycle         
+           261.223      branches                  #  662,157 M/sec                  
+             8.448      branch-misses             #    3,23% of all branches        
+
+       0,001636598 seconds time elapsed
+
+       0,000000000 seconds user
+       0,000744000 seconds sys
+
+

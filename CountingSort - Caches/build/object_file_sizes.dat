@@ -1,0 +1,4 @@
+counting_sort 10240
+counting_sort_O1 6136
+counting_sort_O2 6480
+counting_sort_O3 6640

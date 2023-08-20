@@ -1,0 +1,407 @@
+
+build/counting_sort/counting_sort.o:     Dateiformat elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000000000 <countingSort>:
+#include <stdio.h>
+#include <stdlib.h>
+
+// Funktion für Counting Sort
+void countingSort(int array[], int size) {
+   0:	f3 0f 1e fa          	endbr64 
+   4:	55                   	push   %rbp
+   5:	48 89 e5             	mov    %rsp,%rbp
+   8:	41 55                	push   %r13
+   a:	41 54                	push   %r12
+   c:	53                   	push   %rbx
+   d:	48 83 ec 68          	sub    $0x68,%rsp
+  11:	48 89 7d 88          	mov    %rdi,-0x78(%rbp)
+  15:	89 75 84             	mov    %esi,-0x7c(%rbp)
+  18:	64 48 8b 04 25 28 00 	mov    %fs:0x28,%rax
+  1f:	00 00 
+  21:	48 89 45 d8          	mov    %rax,-0x28(%rbp)
+  25:	31 c0                	xor    %eax,%eax
+  27:	48 89 e0             	mov    %rsp,%rax
+  2a:	48 89 c6             	mov    %rax,%rsi
+  int max = array[0];
+  2d:	48 8b 45 88          	mov    -0x78(%rbp),%rax
+  31:	8b 00                	mov    (%rax),%eax
+  33:	89 45 94             	mov    %eax,-0x6c(%rbp)
+  for (int i = 1; i < size; i++) {
+  36:	c7 45 98 01 00 00 00 	movl   $0x1,-0x68(%rbp)
+  3d:	eb 38                	jmp    77 <countingSort+0x77>
+    if (array[i] > max)
+  3f:	8b 45 98             	mov    -0x68(%rbp),%eax
+  42:	48 98                	cltq   
+  44:	48 8d 14 85 00 00 00 	lea    0x0(,%rax,4),%rdx
+  4b:	00 
+  4c:	48 8b 45 88          	mov    -0x78(%rbp),%rax
+  50:	48 01 d0             	add    %rdx,%rax
+  53:	8b 00                	mov    (%rax),%eax
+  55:	39 45 94             	cmp    %eax,-0x6c(%rbp)
+  58:	7d 19                	jge    73 <countingSort+0x73>
+      max = array[i];
+  5a:	8b 45 98             	mov    -0x68(%rbp),%eax
+  5d:	48 98                	cltq   
+  5f:	48 8d 14 85 00 00 00 	lea    0x0(,%rax,4),%rdx
+  66:	00 
+  67:	48 8b 45 88          	mov    -0x78(%rbp),%rax
+  6b:	48 01 d0             	add    %rdx,%rax
+  6e:	8b 00                	mov    (%rax),%eax
+  70:	89 45 94             	mov    %eax,-0x6c(%rbp)
+  for (int i = 1; i < size; i++) {
+  73:	83 45 98 01          	addl   $0x1,-0x68(%rbp)
+  77:	8b 45 98             	mov    -0x68(%rbp),%eax
+  7a:	3b 45 84             	cmp    -0x7c(%rbp),%eax
+  7d:	7c c0                	jl     3f <countingSort+0x3f>
+  }
+  
+  int count[max + 1];
+  7f:	8b 45 94             	mov    -0x6c(%rbp),%eax
+  82:	83 c0 01             	add    $0x1,%eax
+  85:	48 63 d0             	movslq %eax,%rdx
+  88:	48 83 ea 01          	sub    $0x1,%rdx
+  8c:	48 89 55 b8          	mov    %rdx,-0x48(%rbp)
+  90:	48 63 d0             	movslq %eax,%rdx
+  93:	49 89 d4             	mov    %rdx,%r12
+  96:	41 bd 00 00 00 00    	mov    $0x0,%r13d
+  9c:	48 63 d0             	movslq %eax,%rdx
+  9f:	48 89 d1             	mov    %rdx,%rcx
+  a2:	bb 00 00 00 00       	mov    $0x0,%ebx
+  a7:	48 98                	cltq   
+  a9:	48 8d 14 85 00 00 00 	lea    0x0(,%rax,4),%rdx
+  b0:	00 
+  b1:	b8 10 00 00 00       	mov    $0x10,%eax
+  b6:	48 83 e8 01          	sub    $0x1,%rax
+  ba:	48 01 d0             	add    %rdx,%rax
+  bd:	bb 10 00 00 00       	mov    $0x10,%ebx
+  c2:	ba 00 00 00 00       	mov    $0x0,%edx
+  c7:	48 f7 f3             	div    %rbx
+  ca:	48 6b c0 10          	imul   $0x10,%rax,%rax
+  ce:	48 89 c1             	mov    %rax,%rcx
+  d1:	48 81 e1 00 f0 ff ff 	and    $0xfffffffffffff000,%rcx
+  d8:	48 89 e2             	mov    %rsp,%rdx
+  db:	48 29 ca             	sub    %rcx,%rdx
+  de:	48 39 d4             	cmp    %rdx,%rsp
+  e1:	74 12                	je     f5 <countingSort+0xf5>
+  e3:	48 81 ec 00 10 00 00 	sub    $0x1000,%rsp
+  ea:	48 83 8c 24 f8 0f 00 	orq    $0x0,0xff8(%rsp)
+  f1:	00 00 
+  f3:	eb e9                	jmp    de <countingSort+0xde>
+  f5:	48 89 c2             	mov    %rax,%rdx
+  f8:	81 e2 ff 0f 00 00    	and    $0xfff,%edx
+  fe:	48 29 d4             	sub    %rdx,%rsp
+ 101:	48 89 c2             	mov    %rax,%rdx
+ 104:	81 e2 ff 0f 00 00    	and    $0xfff,%edx
+ 10a:	48 85 d2             	test   %rdx,%rdx
+ 10d:	74 10                	je     11f <countingSort+0x11f>
+ 10f:	25 ff 0f 00 00       	and    $0xfff,%eax
+ 114:	48 83 e8 08          	sub    $0x8,%rax
+ 118:	48 01 e0             	add    %rsp,%rax
+ 11b:	48 83 08 00          	orq    $0x0,(%rax)
+ 11f:	48 89 e0             	mov    %rsp,%rax
+ 122:	48 83 c0 03          	add    $0x3,%rax
+ 126:	48 c1 e8 02          	shr    $0x2,%rax
+ 12a:	48 c1 e0 02          	shl    $0x2,%rax
+ 12e:	48 89 45 c0          	mov    %rax,-0x40(%rbp)
+  for (int i = 0; i <= max; ++i) {
+ 132:	c7 45 9c 00 00 00 00 	movl   $0x0,-0x64(%rbp)
+ 139:	eb 15                	jmp    150 <countingSort+0x150>
+    count[i] = 0;
+ 13b:	48 8b 45 c0          	mov    -0x40(%rbp),%rax
+ 13f:	8b 55 9c             	mov    -0x64(%rbp),%edx
+ 142:	48 63 d2             	movslq %edx,%rdx
+ 145:	c7 04 90 00 00 00 00 	movl   $0x0,(%rax,%rdx,4)
+  for (int i = 0; i <= max; ++i) {
+ 14c:	83 45 9c 01          	addl   $0x1,-0x64(%rbp)
+ 150:	8b 45 9c             	mov    -0x64(%rbp),%eax
+ 153:	3b 45 94             	cmp    -0x6c(%rbp),%eax
+ 156:	7e e3                	jle    13b <countingSort+0x13b>
+  }
+  
+  for (int i = 0; i < size; i++) {
+ 158:	c7 45 a0 00 00 00 00 	movl   $0x0,-0x60(%rbp)
+ 15f:	eb 3a                	jmp    19b <countingSort+0x19b>
+    int element = array[i];
+ 161:	8b 45 a0             	mov    -0x60(%rbp),%eax
+ 164:	48 98                	cltq   
+ 166:	48 8d 14 85 00 00 00 	lea    0x0(,%rax,4),%rdx
+ 16d:	00 
+ 16e:	48 8b 45 88          	mov    -0x78(%rbp),%rax
+ 172:	48 01 d0             	add    %rdx,%rax
+ 175:	8b 00                	mov    (%rax),%eax
+ 177:	89 45 b4             	mov    %eax,-0x4c(%rbp)
+    count[element]++;
+ 17a:	48 8b 45 c0          	mov    -0x40(%rbp),%rax
+ 17e:	8b 55 b4             	mov    -0x4c(%rbp),%edx
+ 181:	48 63 d2             	movslq %edx,%rdx
+ 184:	8b 04 90             	mov    (%rax,%rdx,4),%eax
+ 187:	8d 48 01             	lea    0x1(%rax),%ecx
+ 18a:	48 8b 45 c0          	mov    -0x40(%rbp),%rax
+ 18e:	8b 55 b4             	mov    -0x4c(%rbp),%edx
+ 191:	48 63 d2             	movslq %edx,%rdx
+ 194:	89 0c 90             	mov    %ecx,(%rax,%rdx,4)
+  for (int i = 0; i < size; i++) {
+ 197:	83 45 a0 01          	addl   $0x1,-0x60(%rbp)
+ 19b:	8b 45 a0             	mov    -0x60(%rbp),%eax
+ 19e:	3b 45 84             	cmp    -0x7c(%rbp),%eax
+ 1a1:	7c be                	jl     161 <countingSort+0x161>
+  }
+  
+  for (int i = 1; i <= max; i++) {
+ 1a3:	c7 45 a4 01 00 00 00 	movl   $0x1,-0x5c(%rbp)
+ 1aa:	eb 30                	jmp    1dc <countingSort+0x1dc>
+    count[i] += count[i - 1];
+ 1ac:	48 8b 45 c0          	mov    -0x40(%rbp),%rax
+ 1b0:	8b 55 a4             	mov    -0x5c(%rbp),%edx
+ 1b3:	48 63 d2             	movslq %edx,%rdx
+ 1b6:	8b 0c 90             	mov    (%rax,%rdx,4),%ecx
+ 1b9:	8b 45 a4             	mov    -0x5c(%rbp),%eax
+ 1bc:	8d 50 ff             	lea    -0x1(%rax),%edx
+ 1bf:	48 8b 45 c0          	mov    -0x40(%rbp),%rax
+ 1c3:	48 63 d2             	movslq %edx,%rdx
+ 1c6:	8b 04 90             	mov    (%rax,%rdx,4),%eax
+ 1c9:	01 c1                	add    %eax,%ecx
+ 1cb:	48 8b 45 c0          	mov    -0x40(%rbp),%rax
+ 1cf:	8b 55 a4             	mov    -0x5c(%rbp),%edx
+ 1d2:	48 63 d2             	movslq %edx,%rdx
+ 1d5:	89 0c 90             	mov    %ecx,(%rax,%rdx,4)
+  for (int i = 1; i <= max; i++) {
+ 1d8:	83 45 a4 01          	addl   $0x1,-0x5c(%rbp)
+ 1dc:	8b 45 a4             	mov    -0x5c(%rbp),%eax
+ 1df:	3b 45 94             	cmp    -0x6c(%rbp),%eax
+ 1e2:	7e c8                	jle    1ac <countingSort+0x1ac>
+  }
+  
+  int output[size];
+ 1e4:	8b 45 84             	mov    -0x7c(%rbp),%eax
+ 1e7:	48 63 d0             	movslq %eax,%rdx
+ 1ea:	48 83 ea 01          	sub    $0x1,%rdx
+ 1ee:	48 89 55 c8          	mov    %rdx,-0x38(%rbp)
+ 1f2:	48 63 d0             	movslq %eax,%rdx
+ 1f5:	49 89 d2             	mov    %rdx,%r10
+ 1f8:	41 bb 00 00 00 00    	mov    $0x0,%r11d
+ 1fe:	48 63 d0             	movslq %eax,%rdx
+ 201:	49 89 d0             	mov    %rdx,%r8
+ 204:	41 b9 00 00 00 00    	mov    $0x0,%r9d
+ 20a:	48 98                	cltq   
+ 20c:	48 8d 14 85 00 00 00 	lea    0x0(,%rax,4),%rdx
+ 213:	00 
+ 214:	b8 10 00 00 00       	mov    $0x10,%eax
+ 219:	48 83 e8 01          	sub    $0x1,%rax
+ 21d:	48 01 d0             	add    %rdx,%rax
+ 220:	bf 10 00 00 00       	mov    $0x10,%edi
+ 225:	ba 00 00 00 00       	mov    $0x0,%edx
+ 22a:	48 f7 f7             	div    %rdi
+ 22d:	48 6b c0 10          	imul   $0x10,%rax,%rax
+ 231:	48 89 c1             	mov    %rax,%rcx
+ 234:	48 81 e1 00 f0 ff ff 	and    $0xfffffffffffff000,%rcx
+ 23b:	48 89 e2             	mov    %rsp,%rdx
+ 23e:	48 29 ca             	sub    %rcx,%rdx
+ 241:	48 39 d4             	cmp    %rdx,%rsp
+ 244:	74 12                	je     258 <countingSort+0x258>
+ 246:	48 81 ec 00 10 00 00 	sub    $0x1000,%rsp
+ 24d:	48 83 8c 24 f8 0f 00 	orq    $0x0,0xff8(%rsp)
+ 254:	00 00 
+ 256:	eb e9                	jmp    241 <countingSort+0x241>
+ 258:	48 89 c2             	mov    %rax,%rdx
+ 25b:	81 e2 ff 0f 00 00    	and    $0xfff,%edx
+ 261:	48 29 d4             	sub    %rdx,%rsp
+ 264:	48 89 c2             	mov    %rax,%rdx
+ 267:	81 e2 ff 0f 00 00    	and    $0xfff,%edx
+ 26d:	48 85 d2             	test   %rdx,%rdx
+ 270:	74 10                	je     282 <countingSort+0x282>
+ 272:	25 ff 0f 00 00       	and    $0xfff,%eax
+ 277:	48 83 e8 08          	sub    $0x8,%rax
+ 27b:	48 01 e0             	add    %rsp,%rax
+ 27e:	48 83 08 00          	orq    $0x0,(%rax)
+ 282:	48 89 e0             	mov    %rsp,%rax
+ 285:	48 83 c0 03          	add    $0x3,%rax
+ 289:	48 c1 e8 02          	shr    $0x2,%rax
+ 28d:	48 c1 e0 02          	shl    $0x2,%rax
+ 291:	48 89 45 d0          	mov    %rax,-0x30(%rbp)
+  for (int i = size - 1; i >= 0; i--) {
+ 295:	8b 45 84             	mov    -0x7c(%rbp),%eax
+ 298:	83 e8 01             	sub    $0x1,%eax
+ 29b:	89 45 a8             	mov    %eax,-0x58(%rbp)
+ 29e:	eb 57                	jmp    2f7 <countingSort+0x2f7>
+    int element = array[i];
+ 2a0:	8b 45 a8             	mov    -0x58(%rbp),%eax
+ 2a3:	48 98                	cltq   
+ 2a5:	48 8d 14 85 00 00 00 	lea    0x0(,%rax,4),%rdx
+ 2ac:	00 
+ 2ad:	48 8b 45 88          	mov    -0x78(%rbp),%rax
+ 2b1:	48 01 d0             	add    %rdx,%rax
+ 2b4:	8b 00                	mov    (%rax),%eax
+ 2b6:	89 45 b0             	mov    %eax,-0x50(%rbp)
+    output[count[element] - 1] = element;
+ 2b9:	48 8b 45 c0          	mov    -0x40(%rbp),%rax
+ 2bd:	8b 55 b0             	mov    -0x50(%rbp),%edx
+ 2c0:	48 63 d2             	movslq %edx,%rdx
+ 2c3:	8b 04 90             	mov    (%rax,%rdx,4),%eax
+ 2c6:	8d 50 ff             	lea    -0x1(%rax),%edx
+ 2c9:	48 8b 45 d0          	mov    -0x30(%rbp),%rax
+ 2cd:	48 63 d2             	movslq %edx,%rdx
+ 2d0:	8b 4d b0             	mov    -0x50(%rbp),%ecx
+ 2d3:	89 0c 90             	mov    %ecx,(%rax,%rdx,4)
+    count[element]--;
+ 2d6:	48 8b 45 c0          	mov    -0x40(%rbp),%rax
+ 2da:	8b 55 b0             	mov    -0x50(%rbp),%edx
+ 2dd:	48 63 d2             	movslq %edx,%rdx
+ 2e0:	8b 04 90             	mov    (%rax,%rdx,4),%eax
+ 2e3:	8d 48 ff             	lea    -0x1(%rax),%ecx
+ 2e6:	48 8b 45 c0          	mov    -0x40(%rbp),%rax
+ 2ea:	8b 55 b0             	mov    -0x50(%rbp),%edx
+ 2ed:	48 63 d2             	movslq %edx,%rdx
+ 2f0:	89 0c 90             	mov    %ecx,(%rax,%rdx,4)
+  for (int i = size - 1; i >= 0; i--) {
+ 2f3:	83 6d a8 01          	subl   $0x1,-0x58(%rbp)
+ 2f7:	83 7d a8 00          	cmpl   $0x0,-0x58(%rbp)
+ 2fb:	79 a3                	jns    2a0 <countingSort+0x2a0>
+  }
+  
+  for (int i = 0; i < size; i++) {
+ 2fd:	c7 45 ac 00 00 00 00 	movl   $0x0,-0x54(%rbp)
+ 304:	eb 28                	jmp    32e <countingSort+0x32e>
+    array[i] = output[i];
+ 306:	8b 45 ac             	mov    -0x54(%rbp),%eax
+ 309:	48 98                	cltq   
+ 30b:	48 8d 14 85 00 00 00 	lea    0x0(,%rax,4),%rdx
+ 312:	00 
+ 313:	48 8b 45 88          	mov    -0x78(%rbp),%rax
+ 317:	48 8d 0c 02          	lea    (%rdx,%rax,1),%rcx
+ 31b:	48 8b 45 d0          	mov    -0x30(%rbp),%rax
+ 31f:	8b 55 ac             	mov    -0x54(%rbp),%edx
+ 322:	48 63 d2             	movslq %edx,%rdx
+ 325:	8b 04 90             	mov    (%rax,%rdx,4),%eax
+ 328:	89 01                	mov    %eax,(%rcx)
+  for (int i = 0; i < size; i++) {
+ 32a:	83 45 ac 01          	addl   $0x1,-0x54(%rbp)
+ 32e:	8b 45 ac             	mov    -0x54(%rbp),%eax
+ 331:	3b 45 84             	cmp    -0x7c(%rbp),%eax
+ 334:	7c d0                	jl     306 <countingSort+0x306>
+ 336:	48 89 f4             	mov    %rsi,%rsp
+  }
+}
+ 339:	90                   	nop
+ 33a:	48 8b 45 d8          	mov    -0x28(%rbp),%rax
+ 33e:	64 48 2b 04 25 28 00 	sub    %fs:0x28,%rax
+ 345:	00 00 
+ 347:	74 05                	je     34e <countingSort+0x34e>
+ 349:	e8 00 00 00 00       	call   34e <countingSort+0x34e>
+ 34e:	48 8d 65 e8          	lea    -0x18(%rbp),%rsp
+ 352:	5b                   	pop    %rbx
+ 353:	41 5c                	pop    %r12
+ 355:	41 5d                	pop    %r13
+ 357:	5d                   	pop    %rbp
+ 358:	c3                   	ret    
+
+0000000000000359 <printArray>:
+
+// Hilfsfunktion zum Drucken eines Arrays
+void printArray(int array[], int size) {
+ 359:	f3 0f 1e fa          	endbr64 
+ 35d:	55                   	push   %rbp
+ 35e:	48 89 e5             	mov    %rsp,%rbp
+ 361:	48 83 ec 20          	sub    $0x20,%rsp
+ 365:	48 89 7d e8          	mov    %rdi,-0x18(%rbp)
+ 369:	89 75 e4             	mov    %esi,-0x1c(%rbp)
+  for (int i = 0; i < size; i++) {
+ 36c:	c7 45 fc 00 00 00 00 	movl   $0x0,-0x4(%rbp)
+ 373:	eb 30                	jmp    3a5 <printArray+0x4c>
+    printf("%d ", array[i]);
+ 375:	8b 45 fc             	mov    -0x4(%rbp),%eax
+ 378:	48 98                	cltq   
+ 37a:	48 8d 14 85 00 00 00 	lea    0x0(,%rax,4),%rdx
+ 381:	00 
+ 382:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+ 386:	48 01 d0             	add    %rdx,%rax
+ 389:	8b 00                	mov    (%rax),%eax
+ 38b:	89 c6                	mov    %eax,%esi
+ 38d:	48 8d 05 00 00 00 00 	lea    0x0(%rip),%rax        # 394 <printArray+0x3b>
+ 394:	48 89 c7             	mov    %rax,%rdi
+ 397:	b8 00 00 00 00       	mov    $0x0,%eax
+ 39c:	e8 00 00 00 00       	call   3a1 <printArray+0x48>
+  for (int i = 0; i < size; i++) {
+ 3a1:	83 45 fc 01          	addl   $0x1,-0x4(%rbp)
+ 3a5:	8b 45 fc             	mov    -0x4(%rbp),%eax
+ 3a8:	3b 45 e4             	cmp    -0x1c(%rbp),%eax
+ 3ab:	7c c8                	jl     375 <printArray+0x1c>
+  }
+  printf("\n");
+ 3ad:	bf 0a 00 00 00       	mov    $0xa,%edi
+ 3b2:	e8 00 00 00 00       	call   3b7 <printArray+0x5e>
+}
+ 3b7:	90                   	nop
+ 3b8:	c9                   	leave  
+ 3b9:	c3                   	ret    
+
+00000000000003ba <main>:
+// Hauptfunktion
+int main() {
+ 3ba:	f3 0f 1e fa          	endbr64 
+ 3be:	55                   	push   %rbp
+ 3bf:	48 89 e5             	mov    %rsp,%rbp
+ 3c2:	48 81 ec b0 0b 00 00 	sub    $0xbb0,%rsp
+ 3c9:	64 48 8b 04 25 28 00 	mov    %fs:0x28,%rax
+ 3d0:	00 00 
+ 3d2:	48 89 45 f8          	mov    %rax,-0x8(%rbp)
+ 3d6:	31 c0                	xor    %eax,%eax
+  // Beispielaufruf
+  int array[] = {673, 204, 912, 621, 430, 192, 899, 587, 76, 928, 387, 541, 314, 843, 657, 38, 501, 712, 199, 857, 724, 146, 383, 661, 299, 553, 908, 45, 528, 786, 963, 108, 321, 792, 562, 868, 180, 453, 645, 7, 678, 115, 855, 245, 962, 594, 380, 728, 813, 288, 491, 40, 206, 917, 647, 734, 176, 321, 945, 567, 84, 341, 576, 229, 937, 513, 648, 875, 19, 452, 732, 297, 85, 779, 603, 853, 365, 749, 106, 322, 890, 665, 206, 985, 462, 738, 859, 640, 286, 118, 552, 787, 392, 637, 137, 471, 776, 32, 190, 609, 468, 889, 397, 222, 515, 954, 102, 488, 758, 499, 841, 709, 941, 212, 714, 568, 892, 100, 503, 782, 991, 707, 127, 297, 967, 250, 529, 874, 722, 432, 296, 646, 433, 70, 726, 409, 884, 267, 644, 897, 230, 602, 92, 566, 915, 10, 537, 835, 253, 479, 320, 61, 970, 614, 123, 921, 228, 484, 787, 128, 778, 565, 151, 372, 20, 747, 204, 862, 725, 901, 508, 363, 30, 936, 320, 622, 147, 586, 856, 278, 913, 506, 214, 926, 467, 162, 808, 343, 95, 276, 554, 271, 768, 383, 825, 570, 898, 37, 604, 879, 139, 464, 321, 984, 732, 55, 853, 197, 676, 281, 596, 35, 421, 963, 799, 505, 178, 570, 349, 661, 206, 980, 735, 189, 660, 999, 793, 422, 286, 605, 482, 815, 671, 270, 622, 936, 101, 470, 702, 82, 433, 122, 586, 269, 57, 895, 644, 11, 757, 256, 572, 748, 518, 320, 968, 705, 459, 829, 300, 551, 47, 962, 751, 5, 514, 280, 647, 423, 60, 806, 515, 190, 705, 824, 74, 307, 82, 418, 883, 143, 562, 386, 701, 965, 684, 396, 142, 597, 864, 219, 839, 160, 14, 685, 321, 20, 647, 528, 942, 332, 578, 868, 269, 759, 155, 333, 267, 718, 491, 54, 804, 648, 462, 710, 963, 724, 45, 529, 431, 107, 657, 198, 849, 525, 296, 820, 654, 48, 419, 959, 146, 642, 218, 793, 51, 844, 610, 51, 37, 942, 154, 731, 579, 484, 61, 648, 721, 235, 924, 694, 20, 305, 864, 263, 521, 784, 375, 860, 179, 586, 270, 526, 976, 410, 658, 228, 725, 351, 990, 447, 761, 225, 814, 573, 63, 47, 856, 974, 233, 512, 85, 43, 782, 136, 958, 646, 284, 421, 868, 699, 288, 219, 431, 846, 724, 157, 752, 937, 103, 856, 41, 725, 10, 822, 644, 113, 534, 266, 769, 368, 161, 532, 94, 9, 672, 364, 708, 951, 319, 246, 601, 395, 122, 912, 283, 567, 795, 682, 456, 219, 781, 605, 28, 797, 155, 563, 623, 176, 654, 972, 47, 707, 894, 40, 867, 58, 203, 528, 997, 803, 301, 768, 519, 345, 660, 342, 699, 854, 551, 301, 774, 896, 62, 310, 649, 317, 944, 240, 469, 764, 680, 74, 82, 910, 251, 357, 771, 273, 187, 792, 576, 971, 801, 349, 315, 471, 657, 336, 112, 414, 383, 620, 243, 396, 963, 4, 295, 791, 930, 428, 383, 689, 68, 734, 357, 47, 583, 846, 910, 504, 295, 603, 239, 764, 31, 535, 847, 186, 720, 173, 951, 482, 268, 124, 830, 679, 289, 645, 488, 77, 768, 408, 34, 843, 520, 9, 274, 609, 647, 197, 49, 911, 128, 768, 168, 507, 441, 791, 648, 270, 530, 52, 227, 756, 409, 975, 78, 670, 542, 67, 793, 17, 285, 569, 409, 726, 950, 25, 520, 298, 858, 619, 199, 903, 664, 46, 195, 897, 736, 396, 26, 394, 481, 785, 51, 974, 42, 797, 763, 518, 386, 934, 272, 982, 748, 403, 758, 539, 237, 968, 99, 503, 751, 245, 218, 493, 821, 431, 693, 148, 295, 809, 150, 282, 452, 71, 598, 587, 459, 682, 753, 46, 670, 936, 641, 177, 589, 835, 348, 481, 207, 989, 438, 125, 479, 760, 805, 333, 920, 672, 38, 723, 973, 586, 257, 455, 57, 243, 755, 37, 780, 670, 830, 255, 79, 121, 547, 325, 800, 578, 512, 410, 794, 632, 912, 324, 247, 67, 425, 688, 367, 122, 10, 264, 607, 169, 685, 119, 801, 872, 694, 513, 284, 703, 48, 784, 366, 856, 654, 836, 224, 792, 84, 244, 493, 908, 666, 857, 477, 312, 650, 890, 876, 361, 21, 393, 981, 158, 557, 749, 46, 328, 913, 567, 692, 38, 605, 476, 163, 746, 377, 622, 848, 578, 982, 683, 316, 396, 747, 906, 493, 341, 688, 59, 764, 957, 282, 769, 825};
+ 3d8:	48 8d 85 60 f4 ff ff 	lea    -0xba0(%rbp),%rax
+ 3df:	48 8d 15 00 00 00 00 	lea    0x0(%rip),%rdx        # 3e6 <main+0x2c>
+ 3e6:	b9 71 01 00 00       	mov    $0x171,%ecx
+ 3eb:	48 89 c7             	mov    %rax,%rdi
+ 3ee:	48 89 d6             	mov    %rdx,%rsi
+ 3f1:	f3 48 a5             	rep movsq %ds:(%rsi),%es:(%rdi)
+ 3f4:	48 89 f2             	mov    %rsi,%rdx
+ 3f7:	48 89 f8             	mov    %rdi,%rax
+ 3fa:	8b 0a                	mov    (%rdx),%ecx
+ 3fc:	89 08                	mov    %ecx,(%rax)
+  int size = sizeof(array) / sizeof(array[0]);
+ 3fe:	c7 85 5c f4 ff ff e3 	movl   $0x2e3,-0xba4(%rbp)
+ 405:	02 00 00 
+  
+  printf("Unsortiertes Array: ");
+ 408:	48 8d 05 00 00 00 00 	lea    0x0(%rip),%rax        # 40f <main+0x55>
+ 40f:	48 89 c7             	mov    %rax,%rdi
+ 412:	b8 00 00 00 00       	mov    $0x0,%eax
+ 417:	e8 00 00 00 00       	call   41c <main+0x62>
+  printArray(array, size);
+ 41c:	8b 95 5c f4 ff ff    	mov    -0xba4(%rbp),%edx
+ 422:	48 8d 85 60 f4 ff ff 	lea    -0xba0(%rbp),%rax
+ 429:	89 d6                	mov    %edx,%esi
+ 42b:	48 89 c7             	mov    %rax,%rdi
+ 42e:	e8 00 00 00 00       	call   433 <main+0x79>
+  
+  countingSort(array, size);
+ 433:	8b 95 5c f4 ff ff    	mov    -0xba4(%rbp),%edx
+ 439:	48 8d 85 60 f4 ff ff 	lea    -0xba0(%rbp),%rax
+ 440:	89 d6                	mov    %edx,%esi
+ 442:	48 89 c7             	mov    %rax,%rdi
+ 445:	e8 00 00 00 00       	call   44a <main+0x90>
+  
+  printf("Sortiertes Array: ");
+ 44a:	48 8d 05 00 00 00 00 	lea    0x0(%rip),%rax        # 451 <main+0x97>
+ 451:	48 89 c7             	mov    %rax,%rdi
+ 454:	b8 00 00 00 00       	mov    $0x0,%eax
+ 459:	e8 00 00 00 00       	call   45e <main+0xa4>
+  printArray(array, size);
+ 45e:	8b 95 5c f4 ff ff    	mov    -0xba4(%rbp),%edx
+ 464:	48 8d 85 60 f4 ff ff 	lea    -0xba0(%rbp),%rax
+ 46b:	89 d6                	mov    %edx,%esi
+ 46d:	48 89 c7             	mov    %rax,%rdi
+ 470:	e8 00 00 00 00       	call   475 <main+0xbb>
+  
+  return 0;
+ 475:	b8 00 00 00 00       	mov    $0x0,%eax
+ 47a:	48 8b 55 f8          	mov    -0x8(%rbp),%rdx
+ 47e:	64 48 2b 14 25 28 00 	sub    %fs:0x28,%rdx
+ 485:	00 00 
+ 487:	74 05                	je     48e <main+0xd4>
+ 489:	e8 00 00 00 00       	call   48e <main+0xd4>
+ 48e:	c9                   	leave  
+ 48f:	c3                   	ret    

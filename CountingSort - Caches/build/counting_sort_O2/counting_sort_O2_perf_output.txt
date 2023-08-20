@@ -1,0 +1,19 @@
+./build/counting_sort_O2/counting_sort_O2.o: 1: Syntax error: "(" unexpected
+
+ Performance counter stats for './build/counting_sort_O2/counting_sort_O2.o':
+
+              0,28 msec task-clock                #    0,185 CPUs utilized          
+                 0      context-switches          #    0,000 /sec                   
+                 0      cpu-migrations            #    0,000 /sec                   
+                65      page-faults               #  236,019 K/sec                  
+         1.064.805      cycles                    #    3,866 GHz                    
+         1.134.199      instructions              #    1,07  insn per cycle         
+           212.617      branches                  #  772,024 M/sec                  
+             7.013      branch-misses             #    3,30% of all branches        
+
+       0,001486102 seconds time elapsed
+
+       0,000619000 seconds user
+       0,000000000 seconds sys
+
+

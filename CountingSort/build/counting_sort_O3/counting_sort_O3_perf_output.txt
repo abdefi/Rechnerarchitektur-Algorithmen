@@ -1,0 +1,23 @@
+./build/counting_sort_O3/counting_sort_O3.o: 1: ELF: not found
+./build/counting_sort_O3/counting_sort_O3.o: 2: cannot open …H‰D$èI‰Ç…Ûx#HcÃ1öH‰ïH…èEl$ÿE…äîD‰êL‰ğIt–HcHƒÀƒD•H9ğuï…Û~: No such file
+./build/counting_sort_O3/counting_sort_O3.o: 2: cannot open …H‰D$èI‰Ç…Û‰ışÿÿéÿÿÿf„…Û-ÿÿÿë“¸éuşÿÿff.„óú…ö~HFÿATLd‡UH-SH‰ûf‹H‰î¿1ÀHƒÃèL9ãuæ[¿: No such file
+./build/counting_sort_O3/counting_sort_O3.o: 3: ]Aé„¿: not found
+./build/counting_sort_O3/counting_sort_O3.o: 4: Syntax error: ")" unexpected
+
+ Performance counter stats for './build/counting_sort_O3/counting_sort_O3.o':
+
+              0,77 msec task-clock                #    0,398 CPUs utilized          
+                 2      context-switches          #    2,596 K/sec                  
+                 0      cpu-migrations            #    0,000 /sec                   
+               130      page-faults               #  168,750 K/sec                  
+         2.829.189      cycles                    #    3,673 GHz                    
+         2.654.179      instructions              #    0,94  insn per cycle         
+           491.868      branches                  #  638,484 M/sec                  
+            14.275      branch-misses             #    2,90% of all branches        
+
+       0,001937233 seconds time elapsed
+
+       0,001153000 seconds user
+       0,000000000 seconds sys
+
+

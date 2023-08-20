@@ -1,0 +1,19 @@
+./build/counting_sort_O1/counting_sort_O1.o: 1: Syntax error: word unexpected (expecting ")")
+
+ Performance counter stats for './build/counting_sort_O1/counting_sort_O1.o':
+
+              0,39 msec task-clock                #    0,238 CPUs utilized          
+                 0      context-switches          #    0,000 /sec                   
+                 0      cpu-migrations            #    0,000 /sec                   
+                65      page-faults               #  165,823 K/sec                  
+         1.518.395      cycles                    #    3,874 GHz                    
+         1.716.762      instructions              #    1,13  insn per cycle         
+           358.055      branches                  #  913,441 M/sec                  
+             8.694      branch-misses             #    2,43% of all branches        
+
+       0,001645858 seconds time elapsed
+
+       0,000000000 seconds user
+       0,000742000 seconds sys
+
+

@@ -1,0 +1,19 @@
+./build/bubble_sort_O1/bubble_sort_O1.o: 1: Syntax error: word unexpected (expecting ")")
+
+ Performance counter stats for './build/bubble_sort_O1/bubble_sort_O1.o':
+
+              0,34 msec task-clock                #    0,206 CPUs utilized          
+                 0      context-switches          #    0,000 /sec                   
+                 0      cpu-migrations            #    0,000 /sec                   
+                63      page-faults               #  186,317 K/sec                  
+         1.309.175      cycles                    #    3,872 GHz                    
+         1.430.875      instructions              #    1,09  insn per cycle         
+           306.597      branches                  #  906,732 M/sec                  
+             7.834      branch-misses             #    2,56% of all branches        
+
+       0,001643469 seconds time elapsed
+
+       0,000694000 seconds user
+       0,000000000 seconds sys
+
+

@@ -1,0 +1,17 @@
+Performance counter stats for './build/bubble_sort_O1/bubble_sort_O1.o':
+
+              0,43 msec task-clock                #    0,261 CPUs utilized          
+                 2      context-switches          #    4,617 K/sec                  
+                 0      cpu-migrations            #    0,000 /sec                   
+                66      page-faults               #  152,374 K/sec                  
+         1.598.094      cycles                    #    3,690 GHz                    
+         1.550.804      instructions              #    0,97  insn per cycle         
+           281.809      branches                  #  650,610 M/sec                  
+            10.154      branch-misses             #    3,60% of all branches        
+
+       0,001657782 seconds time elapsed
+
+       0,000070000 seconds user
+       0,000728000 seconds sys
+
+

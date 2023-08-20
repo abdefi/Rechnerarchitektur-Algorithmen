@@ -1,0 +1,279 @@
+
+build/counting_sort_O2/counting_sort_O2.o:     Dateiformat elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000000000 <countingSort>:
+   0:	f3 0f 1e fa          	endbr64 
+   4:	55                   	push   %rbp
+   5:	48 89 e5             	mov    %rsp,%rbp
+   8:	41 56                	push   %r14
+   a:	41 55                	push   %r13
+   c:	41 54                	push   %r12
+   e:	49 89 fc             	mov    %rdi,%r12
+  11:	53                   	push   %rbx
+  12:	89 f3                	mov    %esi,%ebx
+  14:	48 83 ec 10          	sub    $0x10,%rsp
+  18:	44 8b 2f             	mov    (%rdi),%r13d
+  1b:	64 48 8b 04 25 28 00 	mov    %fs:0x28,%rax
+  22:	00 00 
+  24:	48 89 45 d8          	mov    %rax,-0x28(%rbp)
+  28:	31 c0                	xor    %eax,%eax
+  2a:	83 fe 01             	cmp    $0x1,%esi
+  2d:	0f 8e bd 01 00 00    	jle    1f0 <countingSort+0x1f0>
+  33:	8d 56 fe             	lea    -0x2(%rsi),%edx
+  36:	48 8d 47 04          	lea    0x4(%rdi),%rax
+  3a:	45 89 ee             	mov    %r13d,%r14d
+  3d:	48 8d 4c 97 08       	lea    0x8(%rdi,%rdx,4),%rcx
+  42:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+  48:	8b 10                	mov    (%rax),%edx
+  4a:	41 39 d6             	cmp    %edx,%r14d
+  4d:	44 0f 4c f2          	cmovl  %edx,%r14d
+  51:	48 83 c0 04          	add    $0x4,%rax
+  55:	48 39 c8             	cmp    %rcx,%rax
+  58:	75 ee                	jne    48 <countingSort+0x48>
+  5a:	41 8d 46 01          	lea    0x1(%r14),%eax
+  5e:	48 89 e1             	mov    %rsp,%rcx
+  61:	48 98                	cltq   
+  63:	48 8d 04 85 0f 00 00 	lea    0xf(,%rax,4),%rax
+  6a:	00 
+  6b:	48 89 c2             	mov    %rax,%rdx
+  6e:	48 25 00 f0 ff ff    	and    $0xfffffffffffff000,%rax
+  74:	48 29 c1             	sub    %rax,%rcx
+  77:	48 83 e2 f0          	and    $0xfffffffffffffff0,%rdx
+  7b:	48 39 cc             	cmp    %rcx,%rsp
+  7e:	74 15                	je     95 <countingSort+0x95>
+  80:	48 81 ec 00 10 00 00 	sub    $0x1000,%rsp
+  87:	48 83 8c 24 f8 0f 00 	orq    $0x0,0xff8(%rsp)
+  8e:	00 00 
+  90:	48 39 cc             	cmp    %rcx,%rsp
+  93:	75 eb                	jne    80 <countingSort+0x80>
+  95:	81 e2 ff 0f 00 00    	and    $0xfff,%edx
+  9b:	48 29 d4             	sub    %rdx,%rsp
+  9e:	48 85 d2             	test   %rdx,%rdx
+  a1:	0f 85 29 01 00 00    	jne    1d0 <countingSort+0x1d0>
+  a7:	48 89 e1             	mov    %rsp,%rcx
+  aa:	45 85 f6             	test   %r14d,%r14d
+  ad:	78 20                	js     cf <countingSort+0xcf>
+  af:	49 63 c6             	movslq %r14d,%rax
+  b2:	48 89 cf             	mov    %rcx,%rdi
+  b5:	31 f6                	xor    %esi,%esi
+  b7:	48 8d 14 85 04 00 00 	lea    0x4(,%rax,4),%rdx
+  be:	00 
+  bf:	e8 00 00 00 00       	call   c4 <countingSort+0xc4>
+  c4:	48 89 c1             	mov    %rax,%rcx
+  c7:	85 db                	test   %ebx,%ebx
+  c9:	0f 8e 11 01 00 00    	jle    1e0 <countingSort+0x1e0>
+  cf:	31 c0                	xor    %eax,%eax
+  d1:	eb 09                	jmp    dc <countingSort+0xdc>
+  d3:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+  d8:	45 8b 2c 84          	mov    (%r12,%rax,4),%r13d
+  dc:	49 63 d5             	movslq %r13d,%rdx
+  df:	48 83 c0 01          	add    $0x1,%rax
+  e3:	83 04 91 01          	addl   $0x1,(%rcx,%rdx,4)
+  e7:	39 c3                	cmp    %eax,%ebx
+  e9:	7f ed                	jg     d8 <countingSort+0xd8>
+  eb:	45 85 f6             	test   %r14d,%r14d
+  ee:	0f 8e 64 01 00 00    	jle    258 <countingSort+0x258>
+  f4:	b8 01 00 00 00       	mov    $0x1,%eax
+  f9:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+ 100:	8b 54 81 fc          	mov    -0x4(%rcx,%rax,4),%edx
+ 104:	01 14 81             	add    %edx,(%rcx,%rax,4)
+ 107:	48 83 c0 01          	add    $0x1,%rax
+ 10b:	41 39 c6             	cmp    %eax,%r14d
+ 10e:	7d f0                	jge    100 <countingSort+0x100>
+ 110:	4c 63 d3             	movslq %ebx,%r10
+ 113:	48 89 e6             	mov    %rsp,%rsi
+ 116:	4a 8d 04 95 0f 00 00 	lea    0xf(,%r10,4),%rax
+ 11d:	00 
+ 11e:	48 89 c2             	mov    %rax,%rdx
+ 121:	48 25 00 f0 ff ff    	and    $0xfffffffffffff000,%rax
+ 127:	48 29 c6             	sub    %rax,%rsi
+ 12a:	48 83 e2 f0          	and    $0xfffffffffffffff0,%rdx
+ 12e:	48 39 f4             	cmp    %rsi,%rsp
+ 131:	74 15                	je     148 <countingSort+0x148>
+ 133:	48 81 ec 00 10 00 00 	sub    $0x1000,%rsp
+ 13a:	48 83 8c 24 f8 0f 00 	orq    $0x0,0xff8(%rsp)
+ 141:	00 00 
+ 143:	48 39 f4             	cmp    %rsi,%rsp
+ 146:	75 eb                	jne    133 <countingSort+0x133>
+ 148:	81 e2 ff 0f 00 00    	and    $0xfff,%edx
+ 14e:	48 29 d4             	sub    %rdx,%rsp
+ 151:	48 85 d2             	test   %rdx,%rdx
+ 154:	75 6a                	jne    1c0 <countingSort+0x1c0>
+ 156:	89 da                	mov    %ebx,%edx
+ 158:	49 89 e1             	mov    %rsp,%r9
+ 15b:	83 ea 01             	sub    $0x1,%edx
+ 15e:	78 24                	js     184 <countingSort+0x184>
+ 160:	48 63 d2             	movslq %edx,%rdx
+ 163:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+ 168:	49 63 34 94          	movslq (%r12,%rdx,4),%rsi
+ 16c:	48 83 ea 01          	sub    $0x1,%rdx
+ 170:	8b 04 b1             	mov    (%rcx,%rsi,4),%eax
+ 173:	83 e8 01             	sub    $0x1,%eax
+ 176:	4c 63 c0             	movslq %eax,%r8
+ 179:	89 04 b1             	mov    %eax,(%rcx,%rsi,4)
+ 17c:	43 89 34 81          	mov    %esi,(%r9,%r8,4)
+ 180:	85 d2                	test   %edx,%edx
+ 182:	79 e4                	jns    168 <countingSort+0x168>
+ 184:	85 db                	test   %ebx,%ebx
+ 186:	7e 13                	jle    19b <countingSort+0x19b>
+ 188:	4a 8d 14 95 00 00 00 	lea    0x0(,%r10,4),%rdx
+ 18f:	00 
+ 190:	4c 89 ce             	mov    %r9,%rsi
+ 193:	4c 89 e7             	mov    %r12,%rdi
+ 196:	e8 00 00 00 00       	call   19b <countingSort+0x19b>
+ 19b:	48 8b 45 d8          	mov    -0x28(%rbp),%rax
+ 19f:	64 48 2b 04 25 28 00 	sub    %fs:0x28,%rax
+ 1a6:	00 00 
+ 1a8:	0f 85 01 01 00 00    	jne    2af <countingSort+0x2af>
+ 1ae:	48 8d 65 e0          	lea    -0x20(%rbp),%rsp
+ 1b2:	5b                   	pop    %rbx
+ 1b3:	41 5c                	pop    %r12
+ 1b5:	41 5d                	pop    %r13
+ 1b7:	41 5e                	pop    %r14
+ 1b9:	5d                   	pop    %rbp
+ 1ba:	c3                   	ret    
+ 1bb:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+ 1c0:	48 83 4c 14 f8 00    	orq    $0x0,-0x8(%rsp,%rdx,1)
+ 1c6:	eb 8e                	jmp    156 <countingSort+0x156>
+ 1c8:	0f 1f 84 00 00 00 00 	nopl   0x0(%rax,%rax,1)
+ 1cf:	00 
+ 1d0:	48 83 4c 14 f8 00    	orq    $0x0,-0x8(%rsp,%rdx,1)
+ 1d6:	e9 cc fe ff ff       	jmp    a7 <countingSort+0xa7>
+ 1db:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+ 1e0:	45 85 f6             	test   %r14d,%r14d
+ 1e3:	0f 8f 0b ff ff ff    	jg     f4 <countingSort+0xf4>
+ 1e9:	eb b0                	jmp    19b <countingSort+0x19b>
+ 1eb:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+ 1f0:	41 8d 45 01          	lea    0x1(%r13),%eax
+ 1f4:	48 89 e1             	mov    %rsp,%rcx
+ 1f7:	48 98                	cltq   
+ 1f9:	48 8d 04 85 0f 00 00 	lea    0xf(,%rax,4),%rax
+ 200:	00 
+ 201:	48 89 c2             	mov    %rax,%rdx
+ 204:	48 25 00 f0 ff ff    	and    $0xfffffffffffff000,%rax
+ 20a:	48 29 c1             	sub    %rax,%rcx
+ 20d:	48 83 e2 f0          	and    $0xfffffffffffffff0,%rdx
+ 211:	48 39 cc             	cmp    %rcx,%rsp
+ 214:	74 15                	je     22b <countingSort+0x22b>
+ 216:	48 81 ec 00 10 00 00 	sub    $0x1000,%rsp
+ 21d:	48 83 8c 24 f8 0f 00 	orq    $0x0,0xff8(%rsp)
+ 224:	00 00 
+ 226:	48 39 cc             	cmp    %rcx,%rsp
+ 229:	75 eb                	jne    216 <countingSort+0x216>
+ 22b:	81 e2 ff 0f 00 00    	and    $0xfff,%edx
+ 231:	48 29 d4             	sub    %rdx,%rsp
+ 234:	48 85 d2             	test   %rdx,%rdx
+ 237:	74 06                	je     23f <countingSort+0x23f>
+ 239:	48 83 4c 14 f8 00    	orq    $0x0,-0x8(%rsp,%rdx,1)
+ 23f:	48 89 e1             	mov    %rsp,%rcx
+ 242:	45 89 ee             	mov    %r13d,%r14d
+ 245:	45 85 ed             	test   %r13d,%r13d
+ 248:	0f 89 61 fe ff ff    	jns    af <countingSort+0xaf>
+ 24e:	e9 74 fe ff ff       	jmp    c7 <countingSort+0xc7>
+ 253:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+ 258:	4c 63 d3             	movslq %ebx,%r10
+ 25b:	48 89 e7             	mov    %rsp,%rdi
+ 25e:	8d 53 ff             	lea    -0x1(%rbx),%edx
+ 261:	4a 8d 04 95 0f 00 00 	lea    0xf(,%r10,4),%rax
+ 268:	00 
+ 269:	48 89 c6             	mov    %rax,%rsi
+ 26c:	48 25 00 f0 ff ff    	and    $0xfffffffffffff000,%rax
+ 272:	48 29 c7             	sub    %rax,%rdi
+ 275:	48 83 e6 f0          	and    $0xfffffffffffffff0,%rsi
+ 279:	48 39 fc             	cmp    %rdi,%rsp
+ 27c:	74 15                	je     293 <countingSort+0x293>
+ 27e:	48 81 ec 00 10 00 00 	sub    $0x1000,%rsp
+ 285:	48 83 8c 24 f8 0f 00 	orq    $0x0,0xff8(%rsp)
+ 28c:	00 00 
+ 28e:	48 39 fc             	cmp    %rdi,%rsp
+ 291:	75 eb                	jne    27e <countingSort+0x27e>
+ 293:	81 e6 ff 0f 00 00    	and    $0xfff,%esi
+ 299:	48 29 f4             	sub    %rsi,%rsp
+ 29c:	48 85 f6             	test   %rsi,%rsi
+ 29f:	74 06                	je     2a7 <countingSort+0x2a7>
+ 2a1:	48 83 4c 34 f8 00    	orq    $0x0,-0x8(%rsp,%rsi,1)
+ 2a7:	49 89 e1             	mov    %rsp,%r9
+ 2aa:	e9 b1 fe ff ff       	jmp    160 <countingSort+0x160>
+ 2af:	e8 00 00 00 00       	call   2b4 <countingSort+0x2b4>
+ 2b4:	66 66 2e 0f 1f 84 00 	data16 cs nopw 0x0(%rax,%rax,1)
+ 2bb:	00 00 00 00 
+ 2bf:	90                   	nop
+
+00000000000002c0 <printArray>:
+ 2c0:	f3 0f 1e fa          	endbr64 
+ 2c4:	85 f6                	test   %esi,%esi
+ 2c6:	7e 48                	jle    310 <printArray+0x50>
+ 2c8:	8d 46 ff             	lea    -0x1(%rsi),%eax
+ 2cb:	41 54                	push   %r12
+ 2cd:	4c 8d 64 87 04       	lea    0x4(%rdi,%rax,4),%r12
+ 2d2:	55                   	push   %rbp
+ 2d3:	48 8d 2d 00 00 00 00 	lea    0x0(%rip),%rbp        # 2da <printArray+0x1a>
+ 2da:	53                   	push   %rbx
+ 2db:	48 89 fb             	mov    %rdi,%rbx
+ 2de:	66 90                	xchg   %ax,%ax
+ 2e0:	8b 13                	mov    (%rbx),%edx
+ 2e2:	48 89 ee             	mov    %rbp,%rsi
+ 2e5:	bf 01 00 00 00       	mov    $0x1,%edi
+ 2ea:	31 c0                	xor    %eax,%eax
+ 2ec:	48 83 c3 04          	add    $0x4,%rbx
+ 2f0:	e8 00 00 00 00       	call   2f5 <printArray+0x35>
+ 2f5:	4c 39 e3             	cmp    %r12,%rbx
+ 2f8:	75 e6                	jne    2e0 <printArray+0x20>
+ 2fa:	5b                   	pop    %rbx
+ 2fb:	bf 0a 00 00 00       	mov    $0xa,%edi
+ 300:	5d                   	pop    %rbp
+ 301:	41 5c                	pop    %r12
+ 303:	e9 00 00 00 00       	jmp    308 <printArray+0x48>
+ 308:	0f 1f 84 00 00 00 00 	nopl   0x0(%rax,%rax,1)
+ 30f:	00 
+ 310:	bf 0a 00 00 00       	mov    $0xa,%edi
+ 315:	e9 00 00 00 00       	jmp    31a <printArray+0x5a>
+
+Disassembly of section .text.startup:
+
+0000000000000000 <main>:
+   0:	f3 0f 1e fa          	endbr64 
+   4:	55                   	push   %rbp
+   5:	48 8d 35 00 00 00 00 	lea    0x0(%rip),%rsi        # c <main+0xc>
+   c:	b9 71 01 00 00       	mov    $0x171,%ecx
+  11:	48 81 ec a0 0b 00 00 	sub    $0xba0,%rsp
+  18:	64 48 8b 04 25 28 00 	mov    %fs:0x28,%rax
+  1f:	00 00 
+  21:	48 89 84 24 98 0b 00 	mov    %rax,0xb98(%rsp)
+  28:	00 
+  29:	31 c0                	xor    %eax,%eax
+  2b:	48 89 e7             	mov    %rsp,%rdi
+  2e:	48 89 e5             	mov    %rsp,%rbp
+  31:	f3 48 a5             	rep movsq %ds:(%rsi),%es:(%rdi)
+  34:	8b 06                	mov    (%rsi),%eax
+  36:	48 8d 35 00 00 00 00 	lea    0x0(%rip),%rsi        # 3d <main+0x3d>
+  3d:	89 07                	mov    %eax,(%rdi)
+  3f:	bf 01 00 00 00       	mov    $0x1,%edi
+  44:	31 c0                	xor    %eax,%eax
+  46:	e8 00 00 00 00       	call   4b <main+0x4b>
+  4b:	be e3 02 00 00       	mov    $0x2e3,%esi
+  50:	48 89 ef             	mov    %rbp,%rdi
+  53:	e8 00 00 00 00       	call   58 <main+0x58>
+  58:	be e3 02 00 00       	mov    $0x2e3,%esi
+  5d:	48 89 ef             	mov    %rbp,%rdi
+  60:	e8 00 00 00 00       	call   65 <main+0x65>
+  65:	48 8d 35 00 00 00 00 	lea    0x0(%rip),%rsi        # 6c <main+0x6c>
+  6c:	bf 01 00 00 00       	mov    $0x1,%edi
+  71:	31 c0                	xor    %eax,%eax
+  73:	e8 00 00 00 00       	call   78 <main+0x78>
+  78:	be e3 02 00 00       	mov    $0x2e3,%esi
+  7d:	48 89 ef             	mov    %rbp,%rdi
+  80:	e8 00 00 00 00       	call   85 <main+0x85>
+  85:	48 8b 84 24 98 0b 00 	mov    0xb98(%rsp),%rax
+  8c:	00 
+  8d:	64 48 2b 04 25 28 00 	sub    %fs:0x28,%rax
+  94:	00 00 
+  96:	75 0b                	jne    a3 <main+0xa3>
+  98:	48 81 c4 a0 0b 00 00 	add    $0xba0,%rsp
+  9f:	31 c0                	xor    %eax,%eax
+  a1:	5d                   	pop    %rbp
+  a2:	c3                   	ret    
+  a3:	e8 00 00 00 00       	call   a8 <.LC3+0x8f>

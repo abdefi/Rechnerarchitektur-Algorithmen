@@ -1,0 +1,283 @@
+
+build/counting_sort/counting_sort.o:     Dateiformat elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000000000 <countingSort>:
+#include <stdlib.h>
+#include <omp.h>
+#include <string.h>
+#include <time.h>
+
+void countingSort(int*array,int size) {
+   0:	f3 0f 1e fa          	endbr64 
+   4:	55                   	push   %rbp
+   5:	48 89 e5             	mov    %rsp,%rbp
+   8:	53                   	push   %rbx
+   9:	48 83 ec 58          	sub    $0x58,%rsp
+   d:	48 89 7d a8          	mov    %rdi,-0x58(%rbp)
+  11:	89 75 a4             	mov    %esi,-0x5c(%rbp)
+  14:	64 48 8b 04 25 28 00 	mov    %fs:0x28,%rax
+  1b:	00 00 
+  1d:	48 89 45 e8          	mov    %rax,-0x18(%rbp)
+  21:	31 c0                	xor    %eax,%eax
+  23:	48 89 e0             	mov    %rsp,%rax
+  26:	48 89 c3             	mov    %rax,%rbx
+    int i, j, count;
+    int sortedArray[size];
+  29:	8b 4d a4             	mov    -0x5c(%rbp),%ecx
+  2c:	48 63 c1             	movslq %ecx,%rax
+  2f:	48 83 e8 01          	sub    $0x1,%rax
+  33:	48 89 45 c0          	mov    %rax,-0x40(%rbp)
+  37:	48 63 c1             	movslq %ecx,%rax
+  3a:	49 89 c2             	mov    %rax,%r10
+  3d:	41 bb 00 00 00 00    	mov    $0x0,%r11d
+  43:	48 63 c1             	movslq %ecx,%rax
+  46:	49 89 c0             	mov    %rax,%r8
+  49:	41 b9 00 00 00 00    	mov    $0x0,%r9d
+  4f:	48 63 c1             	movslq %ecx,%rax
+  52:	48 8d 14 85 00 00 00 	lea    0x0(,%rax,4),%rdx
+  59:	00 
+  5a:	b8 10 00 00 00       	mov    $0x10,%eax
+  5f:	48 83 e8 01          	sub    $0x1,%rax
+  63:	48 01 d0             	add    %rdx,%rax
+  66:	bf 10 00 00 00       	mov    $0x10,%edi
+  6b:	ba 00 00 00 00       	mov    $0x0,%edx
+  70:	48 f7 f7             	div    %rdi
+  73:	48 6b c0 10          	imul   $0x10,%rax,%rax
+  77:	48 89 c6             	mov    %rax,%rsi
+  7a:	48 81 e6 00 f0 ff ff 	and    $0xfffffffffffff000,%rsi
+  81:	48 89 e2             	mov    %rsp,%rdx
+  84:	48 29 f2             	sub    %rsi,%rdx
+  87:	48 39 d4             	cmp    %rdx,%rsp
+  8a:	74 12                	je     9e <countingSort+0x9e>
+  8c:	48 81 ec 00 10 00 00 	sub    $0x1000,%rsp
+  93:	48 83 8c 24 f8 0f 00 	orq    $0x0,0xff8(%rsp)
+  9a:	00 00 
+  9c:	eb e9                	jmp    87 <countingSort+0x87>
+  9e:	48 89 c2             	mov    %rax,%rdx
+  a1:	81 e2 ff 0f 00 00    	and    $0xfff,%edx
+  a7:	48 29 d4             	sub    %rdx,%rsp
+  aa:	48 89 c2             	mov    %rax,%rdx
+  ad:	81 e2 ff 0f 00 00    	and    $0xfff,%edx
+  b3:	48 85 d2             	test   %rdx,%rdx
+  b6:	74 10                	je     c8 <countingSort+0xc8>
+  b8:	25 ff 0f 00 00       	and    $0xfff,%eax
+  bd:	48 83 e8 08          	sub    $0x8,%rax
+  c1:	48 01 e0             	add    %rsp,%rax
+  c4:	48 83 08 00          	orq    $0x0,(%rax)
+  c8:	48 89 e0             	mov    %rsp,%rax
+  cb:	48 83 c0 03          	add    $0x3,%rax
+  cf:	48 c1 e8 02          	shr    $0x2,%rax
+  d3:	48 c1 e0 02          	shl    $0x2,%rax
+  d7:	48 89 45 c8          	mov    %rax,-0x38(%rbp)
+     memset(sortedArray, 0, sizeof(sortedArray));
+  db:	48 63 c1             	movslq %ecx,%rax
+  de:	48 8d 14 85 00 00 00 	lea    0x0(,%rax,4),%rdx
+  e5:	00 
+  e6:	48 8b 45 c8          	mov    -0x38(%rbp),%rax
+  ea:	be 00 00 00 00       	mov    $0x0,%esi
+  ef:	48 89 c7             	mov    %rax,%rdi
+  f2:	e8 00 00 00 00       	call   f7 <countingSort+0xf7>
+    #pragma omp parallel private(i, j, count)
+  f7:	48 8b 45 c8          	mov    -0x38(%rbp),%rax
+  fb:	48 89 45 d8          	mov    %rax,-0x28(%rbp)
+  ff:	8b 45 a4             	mov    -0x5c(%rbp),%eax
+ 102:	89 45 e0             	mov    %eax,-0x20(%rbp)
+ 105:	48 8b 45 a8          	mov    -0x58(%rbp),%rax
+ 109:	48 89 45 d0          	mov    %rax,-0x30(%rbp)
+ 10d:	48 8d 45 d0          	lea    -0x30(%rbp),%rax
+ 111:	b9 00 00 00 00       	mov    $0x0,%ecx
+ 116:	ba 00 00 00 00       	mov    $0x0,%edx
+ 11b:	48 89 c6             	mov    %rax,%rsi
+ 11e:	48 8d 05 de 00 00 00 	lea    0xde(%rip),%rax        # 203 <countingSort._omp_fn.0>
+ 125:	48 89 c7             	mov    %rax,%rdi
+ 128:	e8 00 00 00 00       	call   12d <countingSort+0x12d>
+            while (sortedArray[count] != 0)
+                count++;
+            sortedArray[count] = array[i];
+        }
+    } 
+    for (i = 0; i <size; i ++) 
+ 12d:	c7 45 bc 00 00 00 00 	movl   $0x0,-0x44(%rbp)
+ 134:	eb 27                	jmp    15d <countingSort+0x15d>
+        printf("%d ", sortedArray[i]);
+ 136:	48 8b 45 c8          	mov    -0x38(%rbp),%rax
+ 13a:	8b 55 bc             	mov    -0x44(%rbp),%edx
+ 13d:	48 63 d2             	movslq %edx,%rdx
+ 140:	8b 04 90             	mov    (%rax,%rdx,4),%eax
+ 143:	89 c6                	mov    %eax,%esi
+ 145:	48 8d 05 00 00 00 00 	lea    0x0(%rip),%rax        # 14c <countingSort+0x14c>
+ 14c:	48 89 c7             	mov    %rax,%rdi
+ 14f:	b8 00 00 00 00       	mov    $0x0,%eax
+ 154:	e8 00 00 00 00       	call   159 <countingSort+0x159>
+    for (i = 0; i <size; i ++) 
+ 159:	83 45 bc 01          	addl   $0x1,-0x44(%rbp)
+ 15d:	8b 45 bc             	mov    -0x44(%rbp),%eax
+ 160:	3b 45 a4             	cmp    -0x5c(%rbp),%eax
+ 163:	7c d1                	jl     136 <countingSort+0x136>
+ 165:	48 89 dc             	mov    %rbx,%rsp
+}
+ 168:	90                   	nop
+ 169:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+ 16d:	64 48 2b 04 25 28 00 	sub    %fs:0x28,%rax
+ 174:	00 00 
+ 176:	74 05                	je     17d <countingSort+0x17d>
+ 178:	e8 00 00 00 00       	call   17d <countingSort+0x17d>
+ 17d:	48 8b 5d f8          	mov    -0x8(%rbp),%rbx
+ 181:	c9                   	leave  
+ 182:	c3                   	ret    
+
+0000000000000183 <main>:
+
+int main() {
+ 183:	f3 0f 1e fa          	endbr64 
+ 187:	55                   	push   %rbp
+ 188:	48 89 e5             	mov    %rsp,%rbp
+ 18b:	48 81 ec b0 0b 00 00 	sub    $0xbb0,%rsp
+ 192:	64 48 8b 04 25 28 00 	mov    %fs:0x28,%rax
+ 199:	00 00 
+ 19b:	48 89 45 f8          	mov    %rax,-0x8(%rbp)
+ 19f:	31 c0                	xor    %eax,%eax
+    int array[] = {673, 204, 912, 621, 430, 192, 899, 587, 76, 928, 387, 541, 314, 843, 657, 38, 501, 712, 199, 857, 724, 146, 383, 661, 299, 553, 908, 45, 528, 786, 963, 108, 321, 792, 562, 868, 180, 453, 645, 7, 678, 115, 855, 245, 962, 594, 380, 728, 813, 288, 491, 40, 206, 917, 647, 734, 176, 321, 945, 567, 84, 341, 576, 229, 937, 513, 648, 875, 19, 452, 732, 297, 85, 779, 603, 853, 365, 749, 106, 322, 890, 665, 206, 985, 462, 738, 859, 640, 286, 118, 552, 787, 392, 637, 137, 471, 776, 32, 190, 609, 468, 889, 397, 222, 515, 954, 102, 488, 758, 499, 841, 709, 941, 212, 714, 568, 892, 100, 503, 782, 991, 707, 127, 297, 967, 250, 529, 874, 722, 432, 296, 646, 433, 70, 726, 409, 884, 267, 644, 897, 230, 602, 92, 566, 915, 10, 537, 835, 253, 479, 320, 61, 970, 614, 123, 921, 228, 484, 787, 128, 778, 565, 151, 372, 20, 747, 204, 862, 725, 901, 508, 363, 30, 936, 320, 622, 147, 586, 856, 278, 913, 506, 214, 926, 467, 162, 808, 343, 95, 276, 554, 271, 768, 383, 825, 570, 898, 37, 604, 879, 139, 464, 321, 984, 732, 55, 853, 197, 676, 281, 596, 35, 421, 963, 799, 505, 178, 570, 349, 661, 206, 980, 735, 189, 660, 999, 793, 422, 286, 605, 482, 815, 671, 270, 622, 936, 101, 470, 702, 82, 433, 122, 586, 269, 57, 895, 644, 11, 757, 256, 572, 748, 518, 320, 968, 705, 459, 829, 300, 551, 47, 962, 751, 5, 514, 280, 647, 423, 60, 806, 515, 190, 705, 824, 74, 307, 82, 418, 883, 143, 562, 386, 701, 965, 684, 396, 142, 597, 864, 219, 839, 160, 14, 685, 321, 20, 647, 528, 942, 332, 578, 868, 269, 759, 155, 333, 267, 718, 491, 54, 804, 648, 462, 710, 963, 724, 45, 529, 431, 107, 657, 198, 849, 525, 296, 820, 654, 48, 419, 959, 146, 642, 218, 793, 51, 844, 610, 51, 37, 942, 154, 731, 579, 484, 61, 648, 721, 235, 924, 694, 20, 305, 864, 263, 521, 784, 375, 860, 179, 586, 270, 526, 976, 410, 658, 228, 725, 351, 990, 447, 761, 225, 814, 573, 63, 47, 856, 974, 233, 512, 85, 43, 782, 136, 958, 646, 284, 421, 868, 699, 288, 219, 431, 846, 724, 157, 752, 937, 103, 856, 41, 725, 10, 822, 644, 113, 534, 266, 769, 368, 161, 532, 94, 9, 672, 364, 708, 951, 319, 246, 601, 395, 122, 912, 283, 567, 795, 682, 456, 219, 781, 605, 28, 797, 155, 563, 623, 176, 654, 972, 47, 707, 894, 40, 867, 58, 203, 528, 997, 803, 301, 768, 519, 345, 660, 342, 699, 854, 551, 301, 774, 896, 62, 310, 649, 317, 944, 240, 469, 764, 680, 74, 82, 910, 251, 357, 771, 273, 187, 792, 576, 971, 801, 349, 315, 471, 657, 336, 112, 414, 383, 620, 243, 396, 963, 4, 295, 791, 930, 428, 383, 689, 68, 734, 357, 47, 583, 846, 910, 504, 295, 603, 239, 764, 31, 535, 847, 186, 720, 173, 951, 482, 268, 124, 830, 679, 289, 645, 488, 77, 768, 408, 34, 843, 520, 9, 274, 609, 647, 197, 49, 911, 128, 768, 168, 507, 441, 791, 648, 270, 530, 52, 227, 756, 409, 975, 78, 670, 542, 67, 793, 17, 285, 569, 409, 726, 950, 25, 520, 298, 858, 619, 199, 903, 664, 46, 195, 897, 736, 396, 26, 394, 481, 785, 51, 974, 42, 797, 763, 518, 386, 934, 272, 982, 748, 403, 758, 539, 237, 968, 99, 503, 751, 245, 218, 493, 821, 431, 693, 148, 295, 809, 150, 282, 452, 71, 598, 587, 459, 682, 753, 46, 670, 936, 641, 177, 589, 835, 348, 481, 207, 989, 438, 125, 479, 760, 805, 333, 920, 672, 38, 723, 973, 586, 257, 455, 57, 243, 755, 37, 780, 670, 830, 255, 79, 121, 547, 325, 800, 578, 512, 410, 794, 632, 912, 324, 247, 67, 425, 688, 367, 122, 10, 264, 607, 169, 685, 119, 801, 872, 694, 513, 284, 703, 48, 784, 366, 856, 654, 836, 224, 792, 84, 244, 493, 908, 666, 857, 477, 312, 650, 890, 876, 361, 21, 393, 981, 158, 557, 749, 46, 328, 913, 567, 692, 38, 605, 476, 163, 746, 377, 622, 848, 578, 982, 683, 316, 396, 747, 906, 493, 341, 688, 59, 764, 957, 282, 769, 825};
+ 1a1:	48 8d 85 60 f4 ff ff 	lea    -0xba0(%rbp),%rax
+ 1a8:	48 8d 15 00 00 00 00 	lea    0x0(%rip),%rdx        # 1af <main+0x2c>
+ 1af:	b9 71 01 00 00       	mov    $0x171,%ecx
+ 1b4:	48 89 c7             	mov    %rax,%rdi
+ 1b7:	48 89 d6             	mov    %rdx,%rsi
+ 1ba:	f3 48 a5             	rep movsq %ds:(%rsi),%es:(%rdi)
+ 1bd:	48 89 f2             	mov    %rsi,%rdx
+ 1c0:	48 89 f8             	mov    %rdi,%rax
+ 1c3:	8b 0a                	mov    (%rdx),%ecx
+ 1c5:	89 08                	mov    %ecx,(%rax)
+    int size = sizeof(array) / sizeof(array[0]);
+ 1c7:	c7 85 5c f4 ff ff e3 	movl   $0x2e3,-0xba4(%rbp)
+ 1ce:	02 00 00 
+    countingSort(array,size);
+ 1d1:	8b 95 5c f4 ff ff    	mov    -0xba4(%rbp),%edx
+ 1d7:	48 8d 85 60 f4 ff ff 	lea    -0xba0(%rbp),%rax
+ 1de:	89 d6                	mov    %edx,%esi
+ 1e0:	48 89 c7             	mov    %rax,%rdi
+ 1e3:	e8 00 00 00 00       	call   1e8 <main+0x65>
+    return 0;
+ 1e8:	b8 00 00 00 00       	mov    $0x0,%eax
+}
+ 1ed:	48 8b 55 f8          	mov    -0x8(%rbp),%rdx
+ 1f1:	64 48 2b 14 25 28 00 	sub    %fs:0x28,%rdx
+ 1f8:	00 00 
+ 1fa:	74 05                	je     201 <main+0x7e>
+ 1fc:	e8 00 00 00 00       	call   201 <main+0x7e>
+ 201:	c9                   	leave  
+ 202:	c3                   	ret    
+
+0000000000000203 <countingSort._omp_fn.0>:
+    #pragma omp parallel private(i, j, count)
+ 203:	f3 0f 1e fa          	endbr64 
+ 207:	55                   	push   %rbp
+ 208:	48 89 e5             	mov    %rsp,%rbp
+ 20b:	41 54                	push   %r12
+ 20d:	53                   	push   %rbx
+ 20e:	48 83 ec 30          	sub    $0x30,%rsp
+ 212:	48 89 7d c8          	mov    %rdi,-0x38(%rbp)
+ 216:	48 8b 45 c8          	mov    -0x38(%rbp),%rax
+ 21a:	48 8b 40 08          	mov    0x8(%rax),%rax
+ 21e:	48 89 45 e0          	mov    %rax,-0x20(%rbp)
+ 222:	48 8b 45 c8          	mov    -0x38(%rbp),%rax
+ 226:	8b 40 10             	mov    0x10(%rax),%eax
+ 229:	89 45 dc             	mov    %eax,-0x24(%rbp)
+ 22c:	48 8b 45 c8          	mov    -0x38(%rbp),%rax
+ 230:	48 8b 00             	mov    (%rax),%rax
+ 233:	48 89 45 e8          	mov    %rax,-0x18(%rbp)
+        #pragma omp for
+ 237:	8b 5d dc             	mov    -0x24(%rbp),%ebx
+ 23a:	e8 00 00 00 00       	call   23f <countingSort._omp_fn.0+0x3c>
+ 23f:	41 89 c4             	mov    %eax,%r12d
+ 242:	e8 00 00 00 00       	call   247 <countingSort._omp_fn.0+0x44>
+ 247:	89 c6                	mov    %eax,%esi
+ 249:	89 d8                	mov    %ebx,%eax
+ 24b:	99                   	cltd   
+ 24c:	41 f7 fc             	idiv   %r12d
+ 24f:	89 c1                	mov    %eax,%ecx
+ 251:	89 d8                	mov    %ebx,%eax
+ 253:	99                   	cltd   
+ 254:	41 f7 fc             	idiv   %r12d
+ 257:	89 d0                	mov    %edx,%eax
+ 259:	39 c6                	cmp    %eax,%esi
+ 25b:	0f 8c b8 00 00 00    	jl     319 <countingSort._omp_fn.0+0x116>
+ 261:	0f af f1             	imul   %ecx,%esi
+ 264:	89 f2                	mov    %esi,%edx
+ 266:	01 d0                	add    %edx,%eax
+ 268:	8d 14 08             	lea    (%rax,%rcx,1),%edx
+ 26b:	39 d0                	cmp    %edx,%eax
+ 26d:	0f 8d 9f 00 00 00    	jge    312 <countingSort._omp_fn.0+0x10f>
+ 273:	89 45 d0             	mov    %eax,-0x30(%rbp)
+            count = 0;
+ 276:	c7 45 d4 00 00 00 00 	movl   $0x0,-0x2c(%rbp)
+            for (j = 0; j < size; j++) {
+ 27d:	c7 45 d8 00 00 00 00 	movl   $0x0,-0x28(%rbp)
+ 284:	90                   	nop
+ 285:	8b 45 d8             	mov    -0x28(%rbp),%eax
+ 288:	3b 45 dc             	cmp    -0x24(%rbp),%eax
+ 28b:	7c 46                	jl     2d3 <countingSort._omp_fn.0+0xd0>
+            while (sortedArray[count] != 0)
+ 28d:	90                   	nop
+ 28e:	48 8b 45 e0          	mov    -0x20(%rbp),%rax
+ 292:	8b 4d d4             	mov    -0x2c(%rbp),%ecx
+ 295:	48 63 c9             	movslq %ecx,%rcx
+ 298:	8b 04 88             	mov    (%rax,%rcx,4),%eax
+ 29b:	85 c0                	test   %eax,%eax
+ 29d:	75 2e                	jne    2cd <countingSort._omp_fn.0+0xca>
+            sortedArray[count] = array[i];
+ 29f:	8b 45 d0             	mov    -0x30(%rbp),%eax
+ 2a2:	48 98                	cltq   
+ 2a4:	48 8d 0c 85 00 00 00 	lea    0x0(,%rax,4),%rcx
+ 2ab:	00 
+ 2ac:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+ 2b0:	48 01 c8             	add    %rcx,%rax
+ 2b3:	8b 30                	mov    (%rax),%esi
+ 2b5:	48 8b 45 e0          	mov    -0x20(%rbp),%rax
+ 2b9:	8b 4d d4             	mov    -0x2c(%rbp),%ecx
+ 2bc:	48 63 c9             	movslq %ecx,%rcx
+ 2bf:	89 34 88             	mov    %esi,(%rax,%rcx,4)
+ 2c2:	83 45 d0 01          	addl   $0x1,-0x30(%rbp)
+ 2c6:	39 55 d0             	cmp    %edx,-0x30(%rbp)
+ 2c9:	7c ab                	jl     276 <countingSort._omp_fn.0+0x73>
+ 2cb:	eb 45                	jmp    312 <countingSort._omp_fn.0+0x10f>
+                count++;
+ 2cd:	83 45 d4 01          	addl   $0x1,-0x2c(%rbp)
+ 2d1:	eb bb                	jmp    28e <countingSort._omp_fn.0+0x8b>
+                if (array[i] > array[j])
+ 2d3:	8b 45 d0             	mov    -0x30(%rbp),%eax
+ 2d6:	48 98                	cltq   
+ 2d8:	48 8d 0c 85 00 00 00 	lea    0x0(,%rax,4),%rcx
+ 2df:	00 
+ 2e0:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+ 2e4:	48 01 c8             	add    %rcx,%rax
+ 2e7:	8b 08                	mov    (%rax),%ecx
+ 2e9:	8b 45 d8             	mov    -0x28(%rbp),%eax
+ 2ec:	48 98                	cltq   
+ 2ee:	48 8d 34 85 00 00 00 	lea    0x0(,%rax,4),%rsi
+ 2f5:	00 
+ 2f6:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+ 2fa:	48 01 f0             	add    %rsi,%rax
+ 2fd:	8b 00                	mov    (%rax),%eax
+ 2ff:	39 c1                	cmp    %eax,%ecx
+ 301:	7f 09                	jg     30c <countingSort._omp_fn.0+0x109>
+            for (j = 0; j < size; j++) {
+ 303:	83 45 d8 01          	addl   $0x1,-0x28(%rbp)
+ 307:	e9 79 ff ff ff       	jmp    285 <countingSort._omp_fn.0+0x82>
+                    count++;
+ 30c:	83 45 d4 01          	addl   $0x1,-0x2c(%rbp)
+ 310:	eb f1                	jmp    303 <countingSort._omp_fn.0+0x100>
+ 312:	e8 00 00 00 00       	call   317 <countingSort._omp_fn.0+0x114>
+ 317:	eb 0d                	jmp    326 <countingSort._omp_fn.0+0x123>
+ 319:	b8 00 00 00 00       	mov    $0x0,%eax
+ 31e:	83 c1 01             	add    $0x1,%ecx
+ 321:	e9 3b ff ff ff       	jmp    261 <countingSort._omp_fn.0+0x5e>
+    #pragma omp parallel private(i, j, count)
+ 326:	48 83 c4 30          	add    $0x30,%rsp
+ 32a:	5b                   	pop    %rbx
+ 32b:	41 5c                	pop    %r12
+ 32d:	5d                   	pop    %rbp
+ 32e:	c3                   	ret    
